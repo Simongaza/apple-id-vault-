@@ -8,39 +8,43 @@
 </head>
 <body style="background:#000; color:#fff; font-family:sans-serif; text-align:center; padding:20px;">
     <h2>🔐 VIP ID UNLOCKER</h2>
-    <p id="msg">Watch one ad to reveal the Apple ID.</p>
+    <p id="msg">Tap the button to verify and get the ID.</p>
     
-    <button id="unlockBtn" style="padding:15px; width:100%; background:#0088cc; border:none; border-radius:10px; color:#fff; font-weight:bold; font-size:18px;">
-        🔓 WATCH AD TO UNLOCK
+    <button id="unlockBtn" style="padding:15px; width:100%; background:#0088cc; border:none; border-radius:10px; color:#fff; font-weight:bold; font-size:18px; cursor:pointer;">
+        🔓 UNLOCK APPLE ID
     </button>
 
     <div id="idResult" style="display:none; margin-top:20px; border:2px dashed #0088cc; padding:15px; border-radius:10px; background:#111;">
         <p><b>Email:</b> <code>vip-minecraft-2026@icloud.com</code></p>
         <p><b>Pass:</b> <code>LoginSafe77!</code></p>
-        <p style="font-size:12px; color:gray;">Please log out after downloading!</p>
+        <p style="font-size:12px; color:gray;">Log out after downloading!</p>
     </div>
 
     <script>
-    const btn = document.getElementById('unlockBtn');
-    const res = document.getElementById('idResult');
-    const msg = document.getElementById('msg');
+        const btn = document.getElementById('unlockBtn');
+        const res = document.getElementById('idResult');
+        const msg = document.getElementById('msg');
 
-    btn.onclick = function() {
-        msg.innerText = "Connecting to ad server...";
-        
-        // This is the correct trigger for YOUR Zone ID 10665092
-        show_10665092().then(() => {
-            // This runs after the ad is shown
+        btn.onclick = function() {
+            msg.innerText = "⌛ Loading Secure Ad...";
+            btn.disabled = true; // Prevent double clicks
+            
+            // Force the ad to show as a "Pop" (Immediate)
+            show_10665092({ type: 'pop' }).then(() => {
+                showTheId();
+            }).catch((e) => {
+                console.log("Ad Error/Blocked:", e);
+                msg.innerText = "⚠️ Ad Server Busy. Verifying...";
+                // Fallback: Show ID after 4 seconds even if ad fails
+                setTimeout(showTheId, 4000);
+            });
+        };
+
+        function showTheId() {
             msg.innerText = "✅ VERIFIED!";
             btn.style.display = "none";
             res.style.display = "block";
-        }).catch((e) => {
-            // Fallback: If ad fails, we still show the ID so you don't lose users
-            console.log("Ad error:", e);
-            msg.innerText = "✅ System Check Passed!";
-            btn.style.display = "none";
-            res.style.display = "block";
-        });
-    };
-</script>
-
+        }
+    </script>
+</body>
+</html>
