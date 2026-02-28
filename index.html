@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://alwingulla.com/88/sdk.js" data-zone="10665092" data-sdk="show_rewarded"></script>
+</head>
+<body style="background:#000; color:#fff; font-family:sans-serif; text-align:center; padding:20px;">
+    <h2>🔐 VIP ID UNLOCKER</h2>
+    <p id="msg">Watch one ad to reveal the Apple ID.</p>
+    
+    <button id="unlockBtn" style="padding:15px; width:100%; background:#0088cc; border:none; border-radius:10px; color:#fff; font-weight:bold; font-size:18px;">
+        🔓 WATCH AD TO UNLOCK
+    </button>
+
+    <div id="idResult" style="display:none; margin-top:20px; border:2px dashed #0088cc; padding:15px; border-radius:10px; background:#111;">
+        <p><b>Email:</b> <code>vip-minecraft-2026@icloud.com</code></p>
+        <p><b>Pass:</b> <code>LoginSafe77!</code></p>
+        <p style="font-size:12px; color:gray;">Please log out after downloading!</p>
+    </div>
+
+    <script>
+        const btn = document.getElementById('unlockBtn');
+        const res = document.getElementById('idResult');
+        const msg = document.getElementById('msg');
+
+        btn.onclick = function() {
+            msg.innerText = "Loading secure ad...";
+            show_rewarded().then(() => {
+                // This ONLY triggers if they finish the ad
+                msg.innerText = "✅ VERIFIED!";
+                btn.style.display = "none";
+                res.style.display = "block";
+            }).catch(() => {
+                alert("You must finish the ad to unlock!");
+                msg.innerText = "Verification failed. Try again.";
+            });
+        };
+    </script>
+</body>
+</html>
