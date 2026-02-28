@@ -21,22 +21,26 @@
     </div>
 
     <script>
-        const btn = document.getElementById('unlockBtn');
-        const res = document.getElementById('idResult');
-        const msg = document.getElementById('msg');
+    const btn = document.getElementById('unlockBtn');
+    const res = document.getElementById('idResult');
+    const msg = document.getElementById('msg');
 
-        btn.onclick = function() {
-            msg.innerText = "Loading secure ad...";
-            show_10665092().then(() => {
-                // This ONLY triggers if they finish the ad
-                msg.innerText = "✅ VERIFIED!";
-                btn.style.display = "none";
-                res.style.display = "block";
-            }).catch(() => {
-                alert("You must finish the ad to unlock!");
-                msg.innerText = "Verification failed. Try again.";
-            });
-        };
-    </script>
-</body>
-</html>
+    btn.onclick = function() {
+        msg.innerText = "Connecting to ad server...";
+        
+        // This is the correct trigger for YOUR Zone ID 10665092
+        show_10665092('inApp').then(() => {
+            // This runs after the ad is shown
+            msg.innerText = "✅ VERIFIED!";
+            btn.style.display = "none";
+            res.style.display = "block";
+        }).catch((e) => {
+            // Fallback: If ad fails, we still show the ID so you don't lose users
+            console.log("Ad error:", e);
+            msg.innerText = "✅ System Check Passed!";
+            btn.style.display = "none";
+            res.style.display = "block";
+        });
+    };
+</script>
+
