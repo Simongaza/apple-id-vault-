@@ -8,7 +8,9 @@
         body { background: #000; color: white; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; text-align: center; padding: 40px 20px; margin: 0; }
         .container { max-width: 400px; margin: auto; border: 1px solid #222; padding: 30px 20px; border-radius: 25px; background: #0a0a0a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
-        .logo { font-size: 50px; margin-bottom: 10px; }
+        /* The Apple Logo image instead of text/empty box */
+        .vault-logo { width: 60px; height: auto; margin-bottom: 20px; filter: invert(1); } /* invert makes it white */
+        
         h2 { font-size: 24px; margin-bottom: 5px; font-weight: 600; }
         p { color: #888; font-size: 14px; line-height: 1.5; }
 
@@ -36,7 +38,8 @@
 <body>
 
 <div class="container">
-    <div class="logo"></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" class="vault-logo">
+    
     <div id="main-content">
         <h2>Apple ID Vault</h2>
         <p id="status-msg">Click below to verify your connection and unlock today's premium accounts.</p>
@@ -86,19 +89,22 @@
         const bar = document.getElementById('bar');
         const secondsSpan = document.getElementById('seconds');
 
+        // This is the core timer function
         const countdown = setInterval(() => {
             timeLeft--;
-            barWidth += 10;
+            barWidth += 10; // Adds 10% to the bar width every second
             
             secondsSpan.innerText = timeLeft;
             bar.style.width = barWidth + "%";
 
             if (timeLeft <= 0) {
+                // If the user tries to click away too fast, the timer stops!
+                // We show the ID now:
                 clearInterval(countdown);
                 document.getElementById('main-content').style.display = 'none';
                 document.getElementById('id-box').style.display = 'block';
             }
-        }, 1000);
+        }, 1000); // 1000 milliseconds = 1 second
     }
 </script>
 
