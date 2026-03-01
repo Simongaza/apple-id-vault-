@@ -1,64 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon VIP Apple Vault</title>
     <style>
-        body { background: #000; color: white; font-family: -apple-system, sans-serif; text-align: center; padding: 50px 20px; }
-        .container { max-width: 400px; margin: auto; border: 1px solid #333; padding: 20px; border-radius: 20px; background: #111; }
+        body { background: #000; color: white; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; text-align: center; padding: 40px 20px; margin: 0; }
+        .container { max-width: 400px; margin: auto; border: 1px solid #222; padding: 30px 20px; border-radius: 25px; background: #0a0a0a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
+        .logo { font-size: 50px; margin-bottom: 10px; }
+        h2 { font-size: 24px; margin-bottom: 5px; font-weight: 600; }
+        p { color: #888; font-size: 14px; line-height: 1.5; }
+
+        /* The Button */
+        #ad-btn { display: inline-block; background: #007AFF; color: white; padding: 16px 32px; border-radius: 14px; text-decoration: none; font-weight: bold; font-size: 16px; margin: 20px 0; transition: transform 0.2s; }
+        #ad-btn:active { transform: scale(0.95); }
+
         /* The Loading Bar */
-        .progress-box { width: 100%; background: #333; border-radius: 10px; height: 10px; margin: 20px 0; overflow: hidden; }
+        .progress-box { width: 100%; background: #222; border-radius: 20px; height: 8px; margin: 25px 0 10px 0; overflow: hidden; display: none; }
         .progress-fill { width: 0%; height: 100%; background: #007AFF; transition: width 1s linear; }
-        
-        #id-box { display: none; background: #222; padding: 15px; border-radius: 15px; border: 1px solid #007AFF; margin-top: 20px; }
-        .id-text { color: #007AFF; font-weight: bold; font-size: 18px; margin: 5px 0; }
-        h2 { font-size: 22px; }
+        #timer-text { display: none; font-size: 13px; color: #555; }
+
+        /* The ID Result */
+        #id-box { display: none; background: #111; padding: 20px; border-radius: 18px; border: 1px solid #1c1c1e; margin-top: 20px; text-align: left; }
+        .id-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
+        .id-value { color: #007AFF; font-size: 17px; font-weight: 600; margin-bottom: 5px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+
+        /* Professional Footer */
+        footer { margin-top: 40px; border-top: 1px solid #1c1c1e; padding-top: 20px; }
+        .copyright { font-size: 12px; color: #444; }
+        .powered { font-size: 13px; color: #666; font-weight: 500; margin-top: 5px; }
+        .brand { color: #007AFF; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div id="loading-area">
-        <h2>🛡️ Secure Verification</h2>
-        <p style="color: #888;">Connecting to Apple Vault...</p>
+    <div class="logo"></div>
+    <div id="main-content">
+        <h2>Apple ID Vault</h2>
+        <p id="status-msg">Click below to verify your connection and unlock today's premium accounts.</p>
         
-        <div class="progress-box">
+        <a href="https://https://omg10.com/4/10647983" 
+           target="_blank" 
+           id="ad-btn" 
+           onclick="handleVerification()">
+           🔓 UNLOCK APPLE ID
+        </a>
+
+        <div class="progress-box" id="p-box">
             <div id="bar" class="progress-fill"></div>
         </div>
-        
-        <p>Unlocking in <span id="timer">10</span>s</p>
+        <p id="timer-text">Security check in progress... <span id="seconds">10</span>s</p>
     </div>
 
     <div id="id-box">
-        <h2 style="color: #4cd964;">✅ ACCESS GRANTED</h2>
-        <p>Copy and use in App Store:</p>
-        <div class="id-text">ID: your-email@gmail.com</div>
-        <div class="id-text">PASS: YourPassword123</div>
-        <p style="font-size: 12px; color: #888;">Status: WORKING (Updated Today)</p>
+        <h3 style="color: #4cd964; margin-top: 0;">✅ Verified Successfully</h3>
+        <div class="id-label">App Store Email</div>
+        <div class="id-value">your-email@gmail.com</div>
+        <div class="id-label">Password</div>
+        <div class="id-value">YourPassword123</div>
+        <p style="font-size: 11px; margin-top: 15px;">⚠️ Reminder: Log in to App Store only. Do not use iCloud.</p>
     </div>
+
+    <footer>
+        <div class="copyright">&copy; 2026 Apple ID Vault. All rights reserved.</div>
+        <div class="powered">Powered by <span class="brand">SIMON</span></div>
+    </footer>
 </div>
 
 <script>
-    let timeLeft = 10;
-    let barWidth = 0;
-    const timerText = document.getElementById('timer');
-    const bar = document.getElementById('bar');
-    const loadingArea = document.getElementById('loading-area');
-    const idBox = document.getElementById('id-box');
-
-    const countdown = setInterval(() => {
-        timeLeft--;
-        barWidth += 10; // Increases bar by 10% every second
+    function handleVerification() {
+        // 1. Hide Button and Update Text
+        document.getElementById('ad-btn').style.display = 'none';
+        document.getElementById('status-msg').innerText = "Verifying... Please keep the ad tab open for 10 seconds.";
         
-        timerText.innerText = timeLeft;
-        bar.style.width = barWidth + "%";
+        // 2. Show Progress Bar and Timer
+        const pBox = document.getElementById('p-box');
+        const tText = document.getElementById('timer-text');
+        pBox.style.display = 'block';
+        tText.style.display = 'block';
 
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            loadingArea.style.display = 'none';
-            idBox.style.display = 'block';
-        }
-    }, 1000);
+        let timeLeft = 10;
+        let barWidth = 0;
+        const bar = document.getElementById('bar');
+        const secondsSpan = document.getElementById('seconds');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            barWidth += 10;
+            
+            secondsSpan.innerText = timeLeft;
+            bar.style.width = barWidth + "%";
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                document.getElementById('main-content').style.display = 'none';
+                document.getElementById('id-box').style.display = 'block';
+            }
+        }, 1000);
+    }
 </script>
 
 </body>
