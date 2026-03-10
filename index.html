@@ -3,26 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura iOS | Maintenance</title>
+    <title>Apple ID Vault | Powered by Simon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+      // PASTE YOUR MONETAG ANTI-ADBLOCK JS CODE HERE
+    </script>
     <style>
-        body { background: #000; color: white; font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .card { padding: 40px; border-radius: 30px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); max-width: 400px; width: 90%; }
-        .logo { width: 60px; margin-bottom: 20px; filter: invert(1); opacity: 0.8; }
-        h1 { font-size: 24px; margin-bottom: 10px; letter-spacing: 1px; }
-        p { color: #888; line-height: 1.6; font-size: 15px; }
-        .date { color: #007AFF; font-weight: bold; margin-top: 20px; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; }
-        .spinner { border: 2px solid rgba(255,255,255,0.1); border-left-color: #007AFF; width: 20px; height: 20px; border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        body { background-color: #000; color: #fff; font-family: -apple-system, system-ui, sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 28px; }
+        .vip-btn { background: linear-gradient(90deg, #ffd700, #ffa500); color: #000; font-weight: 800; border: none; }
+        .hidden-content { display: none; }
+        #timer-circle { transition: stroke-dashoffset 1s linear; stroke: #fff; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fadeIn { animation: fadeIn 0.5s ease forwards; }
     </style>
 </head>
-<body>
-    <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" class="logo">
-        <h1>AURA EXECUTIVE</h1>
-        <p>Our servers are undergoing a massive "Executive Upgrade." We are moving to private, high-security Apple IDs to ensure 0% lock rates.</p>
-        <div class="spinner"></div>
-        <div class="date">Expected Launch: May 2026</div>
-        <p style="font-size: 11px; margin-top: 30px; opacity: 0.5;">Managed by Simon (global Branch)</p>
+<body class="flex flex-col min-h-screen items-center justify-center p-6">
+
+    <div class="text-center mb-8">
+        <i class="fab fa-apple text-6xl text-white mb-2"></i>
+        <h1 class="text-2xl font-bold tracking-tighter uppercase">Simon's iOS Vault</h1>
     </div>
+
+    <div class="glass w-full max-w-md p-8 shadow-2xl">
+        
+        <div id="unlock-section" class="text-center">
+            <h2 class="text-xl font-semibold mb-3">System Verification</h2>
+            <p class="text-gray-400 text-sm mb-8">Verification required for Tier-1 iOS Access. Click below, then return to this page to decrypt the Apple ID.</p>
+            
+            <button onclick="handleAdClick()" id="unlockBtn" class="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                <i class="fas fa-shield-check"></i> VERIFY DEVICE
+            </button>
+        </div>
+
+        <div id="countdown-section" class="hidden-content text-center py-6">
+            <h2 class="text-lg font-bold mb-6 text-blue-400 uppercase tracking-widest">Decrypting Data...</h2>
+            <div class="relative flex items-center justify-center mb-6">
+                <svg class="w-28 h-28 transform -rotate-90">
+                    <circle cx="56" cy="56" r="52" stroke="currentColor" stroke-width="4" fill="transparent" class="text-gray-900" />
+                    <circle id="timer-circle" cx="56" cy="56" r="52" stroke="currentColor" stroke-width="4" fill="transparent" stroke-dasharray="327" stroke-dashoffset="0" />
+                </svg>
+                <span id="timer-text" class="absolute text-xl font-mono">30s</span>
+            </div>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Validating Session - Do Not Leave</p>
+        </div>
+
+        <div id="result-section" class="hidden-content animate-fadeIn">
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-4 mb-6 text-center text-blue-400 text-xs font-bold uppercase tracking-widest">
+                ID Successfully Decrypted
+            </div>
+            
+            <div class="space-y-4 mb-10">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <p class="text-[10px] text-gray-500 uppercase">Apple ID Email</p>
+                    <p id="apple-email" class="font-mono text-sm mt-1">LOADING...</p>
+                </div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <p class="text-[10px] text-gray-500 uppercase">System Password</p>
+                    <p id="apple-pass" class="font-mono text-sm mt-1">LOADING...</p>
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-white/10 text-center">
+                <p class="text-sm text-gray-300 mb-4 font-medium">Want a private ID only for you?</p>
+                <a href="https://t.me/SIMONCORTEZ" class="vip-btn w-full block py-4 rounded-2xl text-center shadow-lg hover:scale-[1.02] transition-all">
+                    JOIN VIP FOR $4 <i class="fas fa-crown ml-2"></i>
+                </a>
+                <p class="text-[10px] text-gray-500 mt-4 uppercase tracking-widest text-center italic">Personal ID • No Lockouts • Lifetime Support</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-12 text-center opacity-40">
+        <p class="text-[10px] tracking-[0.3em] uppercase">Powered by <span class="font-black">Simon</span></p>
+        <p class="text-[8px] mt-1 font-medium italic">All Rights Reserved &copy; 2026</p>
+    </footer>
+
+    <script>
+        // CONFIG - CHANGE THESE
+        const MONETAG_LINK = "https://omg10.com/4/10647983";
+        const REPO_ID = "SOON";
+        const REPO_PW = "SOON";
+
+        let adClicked = false;
+        let timerStarted = false;
+
+        function handleAdClick() {
+            window.open(MONETAG_LINK, '_blank');
+            adClicked = true;
+            document.getElementById('unlockBtn').innerHTML = `<i class="fas fa-spinner fa-spin"></i> Awaiting Return...`;
+        }
+
+        window.onfocus = function() {
+            if (adClicked && !timerStarted) {
+                startTimer();
+            }
+        };
+
+        function startTimer() {
+            timerStarted = true;
+            document.getElementById('unlock-section').classList.add('hidden-content');
+            document.getElementById('countdown-section').classList.remove('hidden-content');
+
+            let time = 30;
+            const circle = document.getElementById('timer-circle');
+            const text = document.getElementById('timer-text');
+            const dash = 327;
+
+            const interval = setInterval(() => {
+                time--;
+                text.innerText = time + "s";
+                circle.style.strokeDashoffset = dash - (time / 30) * dash;
+
+                if (time <= 0) {
+                    clearInterval(interval);
+                    showID();
+                }
+            }, 1000);
+        }
+
+        function showID() {
+            document.getElementById('countdown-section').classList.add('hidden-content');
+            document.getElementById('result-section').classList.remove('hidden-content');
+            document.getElementById('apple-email').innerText = REPO_ID;
+            document.getElementById('apple-pass').innerText = REPO_PW;
+        }
+    </script>
 </body>
 </html>
