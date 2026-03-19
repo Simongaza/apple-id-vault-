@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIMON CORTEZ | iOS 26 PREMIUM VAULT</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="templatemo-parallax-starter.css">
+    
+    <style>
+        /* Special override to make your dark image work perfectly */
+        .premium-bg-custom {
+            position: absolute; top: -50%; left: 0; width: 100%; height: 200%;
+            background-size: cover; background-position: center; z-index: 0;
+            background-image: url('https://image.api.assistants.google.com/image/assistants/v1/projects/assistants-v1-dev/sessions/0f7e155c-6e69-42b4-8255-709081f21a48/files/file-0/download?&sig=AOe7e721f4df3459c043e06a86c770c3c86c76');
+        }
+        
+        /* Dark filter to make the text pop against the image */
+        .parallax-overlay {
+            position: absolute; inset: 0; 
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
-
     <nav id="templatemo-nav">
         <div class="nav-container">
             <a href="#home" class="nav-logo"><i class="fab fa-apple"></i> SIMON CORTEZ</a>
@@ -24,37 +36,34 @@
             </div>
         </div>
     </nav>
-
     <section id="home" class="parallax-section">
-        <div class="parallax-bg" data-speed="0.5" style="background-image: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070')"></div>
+        <div class="premium-bg-custom" data-speed="0.5"></div>
         
         <div class="falling-apps-container">
             <div class="app-col"></div>
             <div class="app-col"></div>
             <div class="app-col"></div>
         </div>
-
+        
         <div class="parallax-overlay"></div>
-
+        
         <div class="section-content">
             <div class="vault-card">
                 <p style="color: #3b82f6; font-size: 10px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Security Protocol</p>
                 <h1 class="section-title hero-title" style="font-size: 32px; margin-bottom: 10px;">ACCESS PORTAL</h1>
-                <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Verify your connection to sync with the iOS 26 private keys and paid games.</p>
+                <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 30px;">Verify your connection to sync with the iOS 26 private keys and paid games.</p>
                 
                 <a href="https://omg10.com/4/10647983" class="btn-premium">Start Verification</a>
                 
-                <p style="margin-top: 25px; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1px;">
+                <p style="margin-top: 25px; font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px;">
                     <i class="fas fa-shield-alt"></i> SECURED BY APPLE BYPASS v4.0
                 </p>
             </div>
         </div>
     </section>
-
     <footer id="templatemo-footer">
         <p>Copyright &copy; 2026 SIMON CORTEZ. All Rights Reserved.</p>
     </footer>
-
     <script src="templatemo-parallax-script.js"></script>
 </body>
 </html>
