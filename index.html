@@ -12,101 +12,75 @@
         
         * { -webkit-tap-highlight-color: transparent; user-select: none; }
 
-        /* FIX: AESTHETIC HIGHWAY BACKGROUND */
-        body { 
-            margin: 0; 
-            padding: 0; 
-            background-color: #000; 
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .highway-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        /* FIXED BACKGROUND LOGIC */
+        html, body {
             height: 100%;
-            /* High-quality dark motion highway */
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+
+        body { 
+            /* Forced Highway Background directly on body */
             background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
-                        url('https://images.unsplash.com/photo-1441260038675-7329ab4cc9a4?q=80&w=2070');
+                        url('https://images.unsplash.com/photo-1441260038675-7329ab4cc9a4?q=80&w=2070') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            z-index: -1;
-            animation: slowZoom 40s infinite alternate linear;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        @keyframes slowZoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.15); }
-        }
-
-        /* Glassmorphism for the card */
+        /* Glass Card - Adjusted for Visibility */
         .glass { 
-            background: rgba(15, 15, 20, 0.8); 
-            backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(20, 20, 25, 0.7); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15); 
             border-radius: 40px;
+            width: 100%;
         }
 
-        .ios-btn { background: #fff; color: #000; border-radius: 22px; font-weight: 800; transition: 0.3s; }
-        .ios-btn:disabled { background: #222; color: #555; }
+        .ios-btn { background: #fff !important; color: #000 !important; border-radius: 22px; font-weight: 800; transition: 0.3s; }
         
-        #notify-toast {
-            position: fixed; bottom: 25px; left: 20px; right: 20px; z-index: 100;
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 25px;
-            padding: 15px; transform: translateY(200%); transition: 0.6s;
-        }
-        #notify-toast.show { transform: translateY(0); }
-
-        .chat-bubble {
-            position: fixed; bottom: 40px; right: 20px; width: 60px; height: 60px;
-            background: linear-gradient(135deg, #0088cc, #007AFF); border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; font-size: 26px;
-            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4); z-index: 100;
-        }
-
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex; flex-direction: column;
             align-items: center; justify-content: center; transition: opacity 0.8s ease;
         }
-        .loader-progress { width: 0%; height: 100%; background: #fff; animation: load 3.5s forwards cubic-bezier(0, 0, 0, 1); }
+        .loader-progress { width: 0%; height: 100%; background: #fff; animation: load 3.5s forwards; }
         @keyframes load { from { width: 0%; } to { width: 100%; } }
+
+        /* Notification Toast */
+        #notify-toast {
+            position: fixed; bottom: 25px; left: 20px; right: 20px; z-index: 100;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 25px;
+            padding: 15px; transform: translateY(200%); transition: 0.6s;
+        }
+        #notify-toast.show { transform: translateY(0); }
     </style>
 </head>
 <body>
 
     <div id="preloader">
-        <div class="text-5xl"><i class="fab fa-apple text-white"></i></div>
+        <div class="text-5xl text-white"><i class="fab fa-apple"></i></div>
         <p class="text-[10px] uppercase tracking-[0.6em] text-white/40 mt-8 font-black">SIMON CORTEZ</p>
         <div class="w-[180px] h-[2px] bg-white/10 mt-6 overflow-hidden"><div class="loader-progress"></div></div>
     </div>
 
-    <div class="highway-bg"></div>
-
-    <div id="notify-toast">
-        <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center"><i class="fas fa-check text-xs"></i></div>
-            <div><p id="notify-text" class="text-[12px] font-black">User decrypted ID</p><p class="text-[10px] text-white/40 uppercase">Verified Securely</p></div>
-        </div>
-    </div>
-
-    <a href="https://t.me/SIMONCORTEZ" target="_blank" class="chat-bubble"><i class="fab fa-telegram-plane"></i></a>
-
     <nav class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black/50 backdrop-blur-xl border-b border-white/5">
-        <div class="flex items-center gap-3"><i class="fab fa-apple text-2xl"></i><span class="font-black text-xl uppercase italic tracking-tighter">SIMON CORTEZ</span></div>
-        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-[9px] font-black uppercase">Live</span></div>
+        <div class="flex items-center gap-3"><i class="fab fa-apple text-white text-2xl"></i><span class="text-white font-black text-xl uppercase italic tracking-tighter">SIMON CORTEZ</span></div>
+        <div class="flex items-center gap-2 text-white"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-[9px] font-black uppercase">Live</span></div>
     </nav>
 
-    <section class="relative z-10 mt-32 w-full max-w-md mx-auto px-5 pb-20">
+    <section class="mt-32 w-full max-w-md px-5 pb-20">
         <div class="glass p-8 md:p-12 text-center shadow-2xl">
             
             <div id="unlock-section">
                 <p class="text-blue-500 text-[10px] font-black uppercase tracking-[0.5em] mb-4">Secure Handshake</p>
-                <h1 class="text-3xl font-black mb-8 tracking-tight">Access Portal</h1>
-                <div class="bg-white/5 p-6 rounded-[25px] mb-10 border border-white/5 text-sm text-white/40 leading-relaxed font-medium">
+                <h1 class="text-white text-3xl font-black mb-8 tracking-tight">Access Portal</h1>
+                <div class="bg-white/5 p-6 rounded-[25px] mb-10 border border-white/5 text-sm text-white/50 leading-relaxed font-medium">
                     Verify your session via our sponsor node to release the current Apple ID key set.
                 </div>
                 <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-[0.2em]">Start Verification</button>
@@ -118,7 +92,7 @@
                         <circle cx="72" cy="72" r="66" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent" />
                         <circle id="timer-circle" cx="72" cy="72" r="66" stroke="#007AFF" stroke-width="5" fill="transparent" stroke-dasharray="415" stroke-dashoffset="0" stroke-linecap="round" />
                     </svg>
-                    <span id="timer-text" class="absolute text-4xl font-black font-mono">30s</span>
+                    <span id="timer-text" class="absolute text-white text-4xl font-black font-mono">30s</span>
                 </div>
                 <p id="timer-status" class="text-[11px] text-blue-400 uppercase tracking-[0.4em] font-black italic animate-pulse">Decrypting...</p>
             </div>
@@ -145,11 +119,22 @@
 
         </div>
         
-        <footer class="mt-12 text-center opacity-40">
+        <footer class="mt-12 text-center text-white/30">
             <p class="text-[11px] font-black tracking-[0.6em] uppercase">SIMON CORTEZ</p>
             <p class="text-[8px] font-bold uppercase tracking-widest mt-2">All Rights Reserved &copy; 2026</p>
         </footer>
     </section>
+
+    <a href="https://t.me/SIMONCORTEZ" target="_blank" class="fixed bottom-10 right-6 w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-2xl text-white shadow-xl z-50">
+        <i class="fab fa-telegram-plane"></i>
+    </a>
+
+    <div id="notify-toast">
+        <div class="flex items-center gap-4 text-white">
+            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center"><i class="fas fa-check text-xs"></i></div>
+            <div><p class="text-[12px] font-black">User decrypted ID</p><p class="text-[10px] text-white/40 uppercase">Verified Securely</p></div>
+        </div>
+    </div>
 
     <script>
         const MONETAG_LINK = "https://omg10.com/4/10647983";
@@ -160,8 +145,9 @@
 
         window.addEventListener('load', () => {
             setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800);
+                const loader = document.getElementById('preloader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 800);
             }, 3500);
         });
 
@@ -170,7 +156,7 @@
             window.open(MONETAG_LINK, '_blank');
             const btn = document.getElementById('unlockBtn');
             btn.disabled = true;
-            btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-3"></i> Syncing...`;
+            btn.innerHTML = `Confirming Click...`;
         }
 
         window.onfocus = () => {
