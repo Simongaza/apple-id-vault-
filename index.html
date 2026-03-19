@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta property="og:title" content="iOS 26 Secure Vault | SIMON CORTEZ">
-    <meta property="og:description" content="Access the global Apple ID repository. Encrypted & Secure.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1441260038675-7329ab4cc9a4?q=80&w=1000">
-    <meta name="twitter:card" content="summary_large_image">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    
     <title>iOS 26 | SIMON CORTEZ Vault</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
-        * { -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        * { -webkit-tap-highlight-color: transparent; user-select: none; }
 
-        /* PRELOADER */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; transition: opacity 0.8s ease;
+        /* FIX: AESTHETIC HIGHWAY BACKGROUND */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
-        .loader-progress { width: 0%; height: 100%; background: #fff; animation: load 3.5s forwards cubic-bezier(0, 0, 0, 1); }
-        @keyframes load { from { width: 0%; } to { width: 100%; } }
 
-        /* BACKGROUND */
-        .bg-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.95)), 
+        .highway-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* High-quality dark motion highway */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), 
                         url('https://images.unsplash.com/photo-1441260038675-7329ab4cc9a4?q=80&w=2070');
-            background-size: cover; background-position: center;
-            animation: zoomBg 40s infinite alternate linear;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            animation: slowZoom 40s infinite alternate linear;
         }
-        @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
 
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.15); }
+        }
+
+        /* Glassmorphism for the card */
         .glass { 
-            background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(50px) saturate(210%);
-            border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 40px;
+            background: rgba(15, 15, 20, 0.8); 
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 40px;
         }
 
         .ios-btn { background: #fff; color: #000; border-radius: 22px; font-weight: 800; transition: 0.3s; }
-        .ios-btn:disabled { background: #222; color: #555; cursor: not-allowed; }
-
+        .ios-btn:disabled { background: #222; color: #555; }
+        
         #notify-toast {
             position: fixed; bottom: 25px; left: 20px; right: 20px; z-index: 100;
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(30px);
@@ -55,14 +61,22 @@
         #notify-toast.show { transform: translateY(0); }
 
         .chat-bubble {
-            position: fixed; bottom: 100px; right: 20px; width: 60px; height: 60px;
+            position: fixed; bottom: 40px; right: 20px; width: 60px; height: 60px;
             background: linear-gradient(135deg, #0088cc, #007AFF); border-radius: 50%; 
             display: flex; align-items: center; justify-content: center; font-size: 26px;
             box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4); z-index: 100;
         }
+
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; transition: opacity 0.8s ease;
+        }
+        .loader-progress { width: 0%; height: 100%; background: #fff; animation: load 3.5s forwards cubic-bezier(0, 0, 0, 1); }
+        @keyframes load { from { width: 0%; } to { width: 100%; } }
     </style>
 </head>
-<body class="flex flex-col items-center">
+<body>
 
     <div id="preloader">
         <div class="text-5xl"><i class="fab fa-apple text-white"></i></div>
@@ -70,7 +84,7 @@
         <div class="w-[180px] h-[2px] bg-white/10 mt-6 overflow-hidden"><div class="loader-progress"></div></div>
     </div>
 
-    <div class="bg-container"></div>
+    <div class="highway-bg"></div>
 
     <div id="notify-toast">
         <div class="flex items-center gap-4">
@@ -86,7 +100,7 @@
         <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-[9px] font-black uppercase">Live</span></div>
     </nav>
 
-    <section class="mt-32 w-full max-w-md px-5 pb-20">
+    <section class="relative z-10 mt-32 w-full max-w-md mx-auto px-5 pb-20">
         <div class="glass p-8 md:p-12 text-center shadow-2xl">
             
             <div id="unlock-section">
@@ -126,13 +140,12 @@
                         <div class="text-[11px] font-black uppercase tracking-[0.2em]">GET FULL VIP ACCESS</div>
                         <div class="text-[9px] font-bold opacity-70 uppercase tracking-widest mt-1">$4.00 USD / EVERY MONTH</div>
                     </a>
-                    <p class="text-[8px] text-center text-white/20 uppercase mt-3 tracking-widest">Click to message Simon Cortez for setup</p>
                 </div>
             </div>
 
         </div>
         
-        <footer class="mt-12 text-center opacity-30">
+        <footer class="mt-12 text-center opacity-40">
             <p class="text-[11px] font-black tracking-[0.6em] uppercase">SIMON CORTEZ</p>
             <p class="text-[8px] font-bold uppercase tracking-widest mt-2">All Rights Reserved &copy; 2026</p>
         </footer>
