@@ -2,97 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>iOS 26 | SIMON CORTEZ VAULT</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMON CORTEZ | iOS 26 PREMIUM VAULT</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-
-        body {
-            margin: 0; background: #000; height: 100vh; overflow: hidden;
-            font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center;
-        }
-
-        /* VERTICAL FALLING SYSTEM */
-        .bg-stream {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; justify-content: space-around;
-            opacity: 0.2; z-index: 1; pointer-events: none;
-        }
-
-        .column { display: flex; flex-direction: column; gap: 25px; animation: fall linear infinite; }
-        
-        @keyframes fall {
-            from { transform: translateY(-50%); }
-            to { transform: translateY(0%); }
-        }
-
-        .column img {
-            width: 80px; height: 80px; border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* CENTER CARD */
-        .vault-card { 
-            position: relative; z-index: 10; width: 90%; max-width: 380px;
-            background: rgba(15, 15, 20, 0.9); backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 44px; padding: 50px 30px; text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .verify-btn {
-            background: #fff; color: #000; font-weight: 900;
-            transition: all 0.2s ease;
-        }
-        
-        .verify-btn:active { transform: scale(0.96); opacity: 0.9; }
-    </style>
+    
+    <link rel="stylesheet" href="templatemo-parallax-starter.css">
 </head>
 <body>
 
-    <div class="bg-stream">
-        <div class="column" style="animation-duration: 12s;">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png">
-            <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/GTASAnAndreas.jpg">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/91/31/31/9131313d-513b-9e45-12b4-7b8979d39e80/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png">
-            <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/GTASAnAndreas.jpg">
+    <nav id="templatemo-nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo"><i class="fab fa-apple"></i> SIMON CORTEZ</a>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
+                <span style="font-size: 10px; font-weight: 700; letter-spacing: 2px;">LIVE VAULT</span>
+            </div>
         </div>
+    </nav>
 
-        <div class="column" style="animation-duration: 20s; padding-top: 80px;">
-            <img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Hitman_Sniper_Cover.png">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/31/89/3b/31893b89-20f5-937b-9f93-199427b68670/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png">
-            <img src="https://upload.wikimedia.org/wikipedia/en/c/c7/GTASAnAndreas.jpg">
-            <img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Hitman_Sniper_Cover.png">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/31/89/3b/31893b89-20f5-937b-9f93-199427b68670/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg">
-        </div>
-
-        <div class="column" style="animation-duration: 16s; padding-top: 40px;">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e5/23/94/e5239401-0941-86f3-181a-8c3873919e83/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg">
-            <img src="https://upload.wikimedia.org/wikipedia/en/b/b1/Hitman_Sniper_Cover.png">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png">
-            <img src="https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png">
-            <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e5/23/94/e5239401-0941-86f3-181a-8c3873919e83/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg">
-        </div>
-    </div>
-
-    <div class="vault-card">
-        <div class="flex justify-center mb-6 text-white text-4xl"><i class="fab fa-apple"></i></div>
-        <p class="text-blue-500 text-[10px] font-black uppercase tracking-[0.4em] mb-4 text-center">Security Check</p>
-        <h1 class="text-white text-3xl font-black mb-6">Vault Access</h1>
-        <p class="text-white/40 text-sm mb-10 leading-relaxed">Unlock the iOS 26 private games repository by verifying your device below.</p>
+    <section id="home" class="parallax-section">
+        <div class="parallax-bg" data-speed="0.5" style="background-image: url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070')"></div>
         
-        <button onclick="window.location.href='https://omg10.com/4/10647983'" class="verify-btn w-full py-5 rounded-2xl text-[12px] uppercase tracking-widest">
-            Verify & Unlock
-        </button>
-    </div>
+        <div class="falling-apps-container">
+            <div class="app-col"></div>
+            <div class="app-col"></div>
+            <div class="app-col"></div>
+        </div>
 
+        <div class="parallax-overlay"></div>
+
+        <div class="section-content">
+            <div class="vault-card">
+                <p style="color: #3b82f6; font-size: 10px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Security Protocol</p>
+                <h1 class="section-title hero-title" style="font-size: 32px; margin-bottom: 10px;">ACCESS PORTAL</h1>
+                <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Verify your connection to sync with the iOS 26 private keys and paid games.</p>
+                
+                <a href="https://omg10.com/4/10647983" class="btn-premium">Start Verification</a>
+                
+                <p style="margin-top: 25px; font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1px;">
+                    <i class="fas fa-shield-alt"></i> SECURED BY APPLE BYPASS v4.0
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="templatemo-footer">
+        <p>Copyright &copy; 2026 SIMON CORTEZ. All Rights Reserved.</p>
+    </footer>
+
+    <script src="templatemo-parallax-script.js"></script>
 </body>
 </html>
