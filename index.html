@@ -1,69 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta property="og:title" content="iOS 26 Secure Vault | SIMON CORTEZ">
+    <meta property="og:description" content="Access the global Apple ID repository. Encrypted & Secure.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1441260038675-7329ab4cc9a4?q=80&w=1000">
+    <meta name="twitter:card" content="summary_large_image">
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMON CORTEZ | iOS 26 PREMIUM VAULT</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <title>iOS 26 | SIMON CORTEZ Vault</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="templatemo-parallax-starter.css">
     
     <style>
-        /* Special override to make your dark image work perfectly */
-        .premium-bg-custom {
-            position: absolute; top: -50%; left: 0; width: 100%; height: 200%;
-            background-size: cover; background-position: center; z-index: 0;
-            background-image: url('https://image.api.assistants.google.com/image/assistants/v1/projects/assistants-v1-dev/sessions/0f7e155c-6e69-42b4-8255-709081f21a48/files/file-0/download?&sig=AOe7e721f4df3459c043e06a86c770c3c86c76');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        * { -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; transition: opacity 0.8s ease;
         }
-        
-        /* Dark filter to make the text pop against the image */
-        .parallax-overlay {
-            position: absolute; inset: 0; 
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 100%);
-            z-index: 1;
+        .loader-progress { width: 0%; height: 100%; background: #fff; animation: load 3.5s forwards cubic-bezier(0, 0, 0, 1); }
+        @keyframes load { from { width: 0%; } to { width: 100%; } }
+
+        /* BACKGROUND */
+        .bg-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.95)), 
+                        url('https://images.unsplash.com/photo-1441260038675-7329ab4cc9a4?q=80&w=2070');
+            background-size: cover; background-position: center;
+            animation: zoomBg 40s infinite alternate linear;
+        }
+        @keyframes zoomBg { from { transform: scale(1); } to { transform: scale(1.1); } }
+
+        .glass { 
+            background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(50px) saturate(210%);
+            border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 40px;
+        }
+
+        .ios-btn { background: #fff; color: #000; border-radius: 22px; font-weight: 800; transition: 0.3s; }
+        .ios-btn:disabled { background: #222; color: #555; cursor: not-allowed; }
+
+        #notify-toast {
+            position: fixed; bottom: 25px; left: 20px; right: 20px; z-index: 100;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 25px;
+            padding: 15px; transform: translateY(200%); transition: 0.6s;
+        }
+        #notify-toast.show { transform: translateY(0); }
+
+        .chat-bubble {
+            position: fixed; bottom: 100px; right: 20px; width: 60px; height: 60px;
+            background: linear-gradient(135deg, #0088cc, #007AFF); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; font-size: 26px;
+            box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4); z-index: 100;
         }
     </style>
 </head>
-<body>
-    <nav id="templatemo-nav">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo"><i class="fab fa-apple"></i> SIMON CORTEZ</a>
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
-                <span style="font-size: 10px; font-weight: 700; letter-spacing: 2px;">LIVE VAULT</span>
-            </div>
+<body class="flex flex-col items-center">
+
+    <div id="preloader">
+        <div class="text-5xl"><i class="fab fa-apple text-white"></i></div>
+        <p class="text-[10px] uppercase tracking-[0.6em] text-white/40 mt-8 font-black">SIMON CORTEZ</p>
+        <div class="w-[180px] h-[2px] bg-white/10 mt-6 overflow-hidden"><div class="loader-progress"></div></div>
+    </div>
+
+    <div class="bg-container"></div>
+
+    <div id="notify-toast">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center"><i class="fas fa-check text-xs"></i></div>
+            <div><p id="notify-text" class="text-[12px] font-black">User decrypted ID</p><p class="text-[10px] text-white/40 uppercase">Verified Securely</p></div>
         </div>
+    </div>
+
+    <a href="https://t.me/SIMONCORTEZ" target="_blank" class="chat-bubble"><i class="fab fa-telegram-plane"></i></a>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black/50 backdrop-blur-xl border-b border-white/5">
+        <div class="flex items-center gap-3"><i class="fab fa-apple text-2xl"></i><span class="font-black text-xl uppercase italic tracking-tighter">SIMON CORTEZ</span></div>
+        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-[9px] font-black uppercase">Live</span></div>
     </nav>
-    <section id="home" class="parallax-section">
-        <div class="premium-bg-custom" data-speed="0.5"></div>
-        
-        <div class="falling-apps-container">
-            <div class="app-col"></div>
-            <div class="app-col"></div>
-            <div class="app-col"></div>
-        </div>
-        
-        <div class="parallax-overlay"></div>
-        
-        <div class="section-content">
-            <div class="vault-card">
-                <p style="color: #3b82f6; font-size: 10px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Security Protocol</p>
-                <h1 class="section-title hero-title" style="font-size: 32px; margin-bottom: 10px;">ACCESS PORTAL</h1>
-                <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 30px;">Verify your connection to sync with the iOS 26 private keys and paid games.</p>
-                
-                <a href="https://omg10.com/4/10647983" class="btn-premium">Start Verification</a>
-                
-                <p style="margin-top: 25px; font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px;">
-                    <i class="fas fa-shield-alt"></i> SECURED BY APPLE BYPASS v4.0
-                </p>
+
+    <section class="mt-32 w-full max-w-md px-5 pb-20">
+        <div class="glass p-8 md:p-12 text-center shadow-2xl">
+            
+            <div id="unlock-section">
+                <p class="text-blue-500 text-[10px] font-black uppercase tracking-[0.5em] mb-4">Secure Handshake</p>
+                <h1 class="text-3xl font-black mb-8 tracking-tight">Access Portal</h1>
+                <div class="bg-white/5 p-6 rounded-[25px] mb-10 border border-white/5 text-sm text-white/40 leading-relaxed font-medium">
+                    Verify your session via our sponsor node to release the current Apple ID key set.
+                </div>
+                <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-[0.2em]">Start Verification</button>
             </div>
+
+            <div id="countdown-section" class="hidden py-4 text-center">
+                <div class="relative flex items-center justify-center mb-10">
+                    <svg class="w-36 h-36 transform -rotate-90">
+                        <circle cx="72" cy="72" r="66" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent" />
+                        <circle id="timer-circle" cx="72" cy="72" r="66" stroke="#007AFF" stroke-width="5" fill="transparent" stroke-dasharray="415" stroke-dashoffset="0" stroke-linecap="round" />
+                    </svg>
+                    <span id="timer-text" class="absolute text-4xl font-black font-mono">30s</span>
+                </div>
+                <p id="timer-status" class="text-[11px] text-blue-400 uppercase tracking-[0.4em] font-black italic animate-pulse">Decrypting...</p>
+            </div>
+
+            <div id="result-section" class="hidden space-y-4 text-left">
+                <div class="bg-white/5 p-5 rounded-2xl border border-white/10">
+                    <p class="text-[9px] text-white/40 font-black mb-1 uppercase tracking-widest">Apple ID Email</p>
+                    <p id="apple-email" class="text-sm font-mono text-blue-400 font-bold tracking-tighter">LOADING...</p>
+                </div>
+                <div class="bg-white/5 p-5 rounded-2xl border border-white/10">
+                    <p class="text-[9px] text-white/40 font-black mb-1 uppercase tracking-widest">Secret Password</p>
+                    <p id="apple-pass" class="text-sm font-mono text-blue-400 font-bold tracking-tighter">LOADING...</p>
+                </div>
+
+                <div class="pt-4">
+                    <a href="https://t.me/SIMONCORTEZ" target="_blank" 
+                       class="block w-full py-5 text-center rounded-2xl shadow-2xl transition-transform active:scale-95"
+                       style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000;">
+                        <div class="text-[11px] font-black uppercase tracking-[0.2em]">GET FULL VIP ACCESS</div>
+                        <div class="text-[9px] font-bold opacity-70 uppercase tracking-widest mt-1">$4.00 USD / EVERY MONTH</div>
+                    </a>
+                    <p class="text-[8px] text-center text-white/20 uppercase mt-3 tracking-widest">Click to message Simon Cortez for setup</p>
+                </div>
+            </div>
+
         </div>
+        
+        <footer class="mt-12 text-center opacity-30">
+            <p class="text-[11px] font-black tracking-[0.6em] uppercase">SIMON CORTEZ</p>
+            <p class="text-[8px] font-bold uppercase tracking-widest mt-2">All Rights Reserved &copy; 2026</p>
+        </footer>
     </section>
-    <footer id="templatemo-footer">
-        <p>Copyright &copy; 2026 SIMON CORTEZ. All Rights Reserved.</p>
-    </footer>
-    <script src="templatemo-parallax-script.js"></script>
+
+    <script>
+        const MONETAG_LINK = "https://omg10.com/4/10647983";
+        const REPO_ID = "vault.apple@simon.net"; 
+        const REPO_PW = "SIMON_CORTEZ_2026";
+
+        let adClicked = false, timerStarted = false, timeRemaining = 30, timerInterval;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 800);
+            }, 3500);
+        });
+
+        function handleAdClick() {
+            adClicked = true;
+            window.open(MONETAG_LINK, '_blank');
+            const btn = document.getElementById('unlockBtn');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-3"></i> Syncing...`;
+        }
+
+        window.onfocus = () => {
+            if (adClicked && !timerStarted) startTimer();
+            else if (timerStarted && timeRemaining > 0) resumeTimer();
+        };
+        window.onblur = () => { if (timerStarted) pauseTimer(); };
+
+        function startTimer() {
+            timerStarted = true;
+            document.getElementById('unlock-section').classList.add('hidden');
+            document.getElementById('countdown-section').classList.remove('hidden');
+            resumeTimer();
+        }
+
+        function resumeTimer() {
+            const status = document.getElementById('timer-status');
+            status.innerText = "Decrypting...";
+            status.className = "text-[11px] text-blue-400 uppercase tracking-[0.4em] font-black italic animate-pulse";
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer-text').innerText = timeRemaining + "s";
+                document.getElementById('timer-circle').style.strokeDashoffset = 415 - (timeRemaining / 30) * 415;
+                if (timeRemaining <= 0) { clearInterval(timerInterval); showID(); }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            const status = document.getElementById('timer-status');
+            status.innerText = "PAUSED - STAY ON PAGE";
+            status.className = "text-[11px] text-red-500 uppercase tracking-[0.4em] font-black";
+        }
+
+        function showID() {
+            document.getElementById('countdown-section').classList.add('hidden');
+            document.getElementById('result-section').classList.remove('hidden');
+            document.getElementById('apple-email').innerText = REPO_ID;
+            document.getElementById('apple-pass').innerText = REPO_PW;
+        }
+
+        setInterval(() => {
+            const toast = document.getElementById('notify-toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }, 15000);
+    </script>
 </body>
 </html>
