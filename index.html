@@ -14,21 +14,37 @@
 
         body, html { 
             margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #000; overflow: hidden; font-family: 'Inter', sans-serif;
+            background: #000; overflow-x: hidden; font-family: 'Inter', sans-serif;
         }
 
-        /* THE HIGHWAY ENGINE (CANVAS) */
-        #highwayCanvas {
+        /* THE MOTION HIGHWAY (Pure CSS - No external images needed) */
+        .highway-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: #000;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)),
+                        repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.03) 1px, rgba(255,255,255,0.03) 2px),
+                        radial-gradient(circle at 50% 50%, #1a1a1a, #000);
+            z-index: -1;
+        }
+
+        .highway-lines {
+            position: absolute; width: 100%; height: 200%;
+            background-image: linear-gradient(to bottom, transparent 95%, rgba(255,255,255,0.1) 95%);
+            background-size: 100% 100px;
+            animation: drive 1s linear infinite;
+        }
+
+        @keyframes drive {
+            from { transform: translateY(-100px); }
+            to { transform: translateY(0); }
         }
 
         .glass { 
-            background: rgba(10, 10, 15, 0.8); 
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(15, 15, 20, 0.85); 
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1); 
             border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .vip-btn {
@@ -53,15 +69,15 @@
         <div class="w-[180px] h-[2px] bg-white/10 mt-6 overflow-hidden"><div class="loader-progress"></div></div>
     </div>
 
-    <canvas id="highwayCanvas"></canvas>
+    <div class="highway-bg"><div class="highway-lines"></div></div>
 
-    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-black/50 backdrop-blur-lg border-b border-white/5">
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 flex justify-between items-center bg-black/40 backdrop-blur-xl border-b border-white/5">
         <div class="flex items-center gap-3"><i class="fab fa-apple text-white text-2xl"></i><span class="text-white font-black text-xl uppercase italic tracking-tighter">SIMON CORTEZ</span></div>
         <div class="flex items-center gap-2 text-white"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-[9px] font-black uppercase">Live Vault</span></div>
     </nav>
 
     <section class="relative z-10 mt-36 w-full max-w-md mx-auto px-5 pb-20">
-        <div class="glass p-10 text-center shadow-2xl">
+        <div class="glass p-10 text-center">
             
             <div id="unlock-section">
                 <p class="text-blue-500 text-[10px] font-black uppercase tracking-[0.5em] mb-4">Security Handshake</p>
@@ -107,51 +123,6 @@
     </a>
 
     <script>
-        // HIGHWAY ANIMATION CODE
-        const canvas = document.getElementById('highwayCanvas');
-        const ctx = canvas.getContext('2d');
-        let stars = [];
-        const numStars = 400;
-
-        function initStars() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            stars = [];
-            for (let i = 0; i < numStars; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width - canvas.width / 2,
-                    y: Math.random() * canvas.height - canvas.height / 2,
-                    z: Math.random() * canvas.width,
-                    o: Math.random()
-                });
-            }
-        }
-
-        function updateStars() {
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < numStars; i++) {
-                let s = stars[i];
-                s.z -= 5; // SPEED OF HIGHWAY
-                if (s.z <= 0) s.z = canvas.width;
-                
-                let sx = (s.x / s.z) * canvas.width + canvas.width / 2;
-                let sy = (s.y / s.z) * canvas.height + canvas.height / 2;
-                let size = (1 - s.z / canvas.width) * 3;
-                
-                ctx.fillStyle = `rgba(255, 255, 255, ${1 - s.z / canvas.width})`;
-                ctx.beginPath();
-                ctx.arc(sx, sy, size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            requestAnimationFrame(updateStars);
-        }
-
-        initStars();
-        updateStars();
-        window.addEventListener('resize', initStars);
-
-        // LOGIC CODE
         const MONETAG_LINK = "https://omg10.com/4/10647983";
         let adClicked = false, timerStarted = false, timeRemaining = 30, timerInterval;
 
