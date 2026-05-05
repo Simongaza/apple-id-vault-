@@ -3,92 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SIMON VEYRON | Official Vault</title>
+    <title>Simon Veyron | VIP Vault 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; overflow: hidden; }
-        .glass { background: #111; border: 1px solid #222; border-radius: 24px; }
-        .ios-btn { background: #fff; color: #000; border-radius: 12px; font-weight: 900; }
-        .game-icon { width: 80px; height: 80px; border-radius: 18px; border: 1px solid #333; background-size: cover; flex-shrink: 0; }
-        /* Real Icons via direct stable CDN */
-        .ic-mc { background-image: url('https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png'); }
-        .ic-gta { background-image: url('https://upload.wikimedia.org/wikipedia/en/c/c4/GTASA_logo.jpg'); }
-        .ic-bully { background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg'); }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-        .shake { animation: shake 0.3s ease-in-out; border: 2px solid #ff3b30 !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        
+        * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; cursor: none; }
+
+        /* iOS 26 Dynamic Background */
+        body { 
+            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Liquid Glass Panels */
+        .glass { 
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(60px) saturate(180%);
+            -webkit-backdrop-filter: blur(60px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Dynamic Island */
+        .dynamic-island {
+            width: 120px;
+            height: 35px;
+            background: #000;
+            border-radius: 20px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow: hidden;
+        }
+        .island-active { width: 300px; height: 60px; border-radius: 30px; }
+
+        .game-icon {
+            width: 85px; height: 85px; border-radius: 20px;
+            background-size: cover; background-position: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .game-icon:hover { transform: scale(1.1); }
+
+        .btn-ios {
+            background: #fff; color: #000; border-radius: 20px;
+            font-weight: 900; transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .btn-ios:active { transform: scale(0.95); background: #e0e0e0; }
+
+        @keyframes pulse-red { 0% { border-color: rgba(255, 59, 48, 0.5); } 50% { border-color: rgba(255, 59, 48, 1); } 100% { border-color: rgba(255, 59, 48, 0.5); } }
+        .timer-warning { animation: pulse-red 1s infinite; border-width: 2px; }
+
+        /* Custom Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="p-6">
+<body>
 
-    <div class="flex justify-between items-center mb-8">
-        <h1 class="font-black italic text-xl">SIMON VEYRON</h1>
-        <div class="bg-zinc-800 px-3 py-1 rounded-full text-[10px] font-bold">ONLINE</div>
+    <div id="island" class="dynamic-island">
+        <span id="island-text" class="text-[10px] font-bold tracking-tight opacity-0">SYSTEM SECURE</span>
     </div>
 
-    <div class="flex gap-4 overflow-x-auto mb-10 pb-2">
-        <div class="game-icon ic-mc"></div>
-        <div class="game-icon ic-gta"></div>
-        <div class="game-icon ic-bully"></div>
-    </div>
+    <nav class="w-full px-8 py-6 flex justify-between items-center mt-4">
+        <div class="flex items-center gap-3">
+            <i class="fab fa-apple text-3xl"></i>
+            <span class="font-black italic text-xl tracking-tighter">SIMON VEYRON</span>
+        </div>
+        <div class="glass px-4 py-2 rounded-full text-[10px] font-black border-none bg-white/10">
+            VAULT v4.0
+        </div>
+    </nav>
 
-    <div class="glass p-8 text-center" id="card">
-        <div id="step-1">
-            <h2 class="text-2xl font-black mb-2">Verification</h2>
-            <p class="text-zinc-500 text-sm mb-6">Stay on the ad page for 30s to release the Apple ID.</p>
-            <button onclick="startFlow()" class="ios-btn w-full py-4 text-sm uppercase">Unlock Now</button>
+    <main class="w-full max-w-lg px-6 mt-10">
+        <div class="flex gap-4 overflow-x-auto no-scrollbar mb-10 pb-4">
+            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png');"></div>
+            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/c/c4/GTASA_logo.jpg');"></div>
+            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg');"></div>
+            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/f/fd/Stardew_Valley_Cover_Art.png');"></div>
+            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/3/35/Geometry_Dash_Logo.PNG');"></div>
         </div>
 
-        <div id="step-2" class="hidden">
-            <div class="text-5xl font-black mb-4" id="timer">30</div>
-            <p class="text-blue-400 font-bold text-xs uppercase tracking-widest" id="status">Verifying Ad View...</p>
-        </div>
-
-        <div id="step-3" class="hidden text-left space-y-4">
-            <div class="bg-zinc-900 p-4 rounded-xl">
-                <p class="text-[10px] text-zinc-500 font-bold uppercase">Apple ID</p>
-                <p class="font-mono text-white">vault.veyron@apple.com</p>
+        <div class="glass p-10 text-center relative overflow-hidden" id="main-card">
+            <div id="start-screen">
+                <h2 class="text-3xl font-black mb-2">Vault Locked</h2>
+                <p class="text-white/50 text-sm mb-10">Verification protocol required. Complete the sponsor handshake to access premium Apple IDs.</p>
+                <button onclick="launchVerification()" class="btn-ios w-full py-6 text-sm uppercase tracking-widest">Start Handshake</button>
             </div>
-            <div class="bg-zinc-900 p-4 rounded-xl">
-                <p class="text-[10px] text-zinc-500 font-bold uppercase">Password</p>
-                <p class="font-mono text-white">Veyron2026!</p>
+
+            <div id="timer-screen" class="hidden">
+                <div class="text-7xl font-black mb-4 tracking-tighter" id="countdown">30</div>
+                <p id="timer-msg" class="text-blue-400 font-black text-[10px] uppercase tracking-widest">Connection Encrypted</p>
+            </div>
+
+            <div id="success-screen" class="hidden space-y-4">
+                <div class="bg-white/5 p-6 rounded-3xl border border-white/10 text-left">
+                    <p class="text-[9px] text-white/30 font-black uppercase mb-1">Elite Apple ID</p>
+                    <p class="text-lg font-bold">veyron.vip@icloud.com</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-3xl border border-white/10 text-left">
+                    <p class="text-[9px] text-white/30 font-black uppercase mb-1">Vault Password</p>
+                    <p class="text-lg font-bold">SimonVeyron_2026!</p>
+                </div>
+                <button class="w-full bg-blue-600 py-5 rounded-3xl font-black uppercase text-xs mt-4">Join Telegram Channel</button>
             </div>
         </div>
-    </div>
+
+        <div class="glass mt-6 p-8">
+            <h3 class="text-blue-400 font-black text-[10px] uppercase mb-6 tracking-widest">Protocol Rules</h3>
+            <div class="space-y-4 text-[13px] text-white/60">
+                <div class="flex gap-4">
+                    <span class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-bold text-white">01</span>
+                    <p>Only sign in through the <strong class="text-white">App Store</strong>. Never use iCloud.</p>
+                </div>
+                <div class="flex gap-4">
+                    <span class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-bold text-white">02</span>
+                    <p>Stay on the ad page for the full 30s. <strong class="text-red-400">Timer will reset</strong> if you return early.</p>
+                </div>
+                <div class="flex gap-4">
+                    <span class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-bold text-white">03</span>
+                    <p>Logout immediately after your download begins.</p>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script>
-        let count = 30;
-        let active = false;
-        let lastSeen = Date.now();
+        let seconds = 30;
+        let flowStarted = false;
+        let lastTimestamp = Date.now();
 
-        function startFlow() {
+        function updateIsland(text, active = true) {
+            const island = document.getElementById('island');
+            const islandText = document.getElementById('island-text');
+            if (active) {
+                island.classList.add('island-active');
+                islandText.innerText = text;
+                islandText.style.opacity = "1";
+            } else {
+                island.classList.remove('island-active');
+                islandText.style.opacity = "0";
+            }
+        }
+
+        function launchVerification() {
             window.open("https://omg10.com/4/10647983", '_blank');
-            active = true;
-            document.getElementById('step-1').classList.add('hidden');
-            document.getElementById('step-2').classList.remove('hidden');
+            flowStarted = true;
+            lastTimestamp = Date.now();
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('timer-screen').classList.remove('hidden');
+            updateIsland("AD VIEW ACTIVE");
             
-            setInterval(() => {
-                if (active) {
-                    // THE CHEAT CHECK:
-                    // If the user is looking at THIS page (document.hidden is false),
-                    // but the clock says they've been here for more than 1.5 seconds... 
-                    // it means they are waiting here instead of the ad. RESET.
-                    if (!document.hidden) {
-                        let now = Date.now();
-                        if (now - lastSeen > 1500) {
-                            count = 30; // RESET TO 30
-                            document.getElementById('card').classList.add('shake');
-                            document.getElementById('status').innerText = "STAY ON THE AD PAGE!";
-                            setTimeout(() => document.getElementById('card').classList.remove('shake'), 500);
-                        }
-                        count--;
-                        lastSeen = now;
+            const mainTimer = setInterval(() => {
+                if (!document.hidden) {
+                    let now = Date.now();
+                    // If they are back here but not enough time passed, reset!
+                    if (now - lastTimestamp > 1800) { 
+                        seconds = 30;
+                        document.getElementById('main-card').classList.add('timer-warning');
+                        document.getElementById('timer-msg').innerText = "DETECTION: STAY ON AD PAGE!";
+                        document.getElementById('timer-msg').classList.replace('text-blue-400', 'text-red-500');
+                        updateIsland("DETECTION: RESETTING...");
+                        setTimeout(() => {
+                            document.getElementById('main-card').classList.remove('timer-warning');
+                            document.getElementById('timer-msg').classList.replace('text-red-500', 'text-blue-400');
+                        }, 2000);
                     }
                     
-                    document.getElementById('timer').innerText = count;
-                    if (count <= 0) {
-                        active = false;
-                        document.getElementById('step-2').classList.add('hidden');
-                        document.getElementById('step-3').classList.remove('hidden');
+                    seconds--;
+                    lastTimestamp = Date.now();
+                    document.getElementById('countdown').innerText = seconds;
+
+                    if (seconds <= 0) {
+                        clearInterval(mainTimer);
+                        updateIsland("VAULT DECRYPTED");
+                        document.getElementById('timer-screen').classList.add('hidden');
+                        document.getElementById('success-screen').classList.remove('hidden');
+                        setTimeout(() => updateIsland("", false), 3000);
                     }
                 }
             }, 1000);
