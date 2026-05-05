@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>iOS 26 | SIMON VEYRON Vault</title>
+    <title>Simon Veyron | VIP Vault</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700;900&display=swap');
         * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow-x: hidden; }
+        body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow: hidden; }
         
         .glass { background: rgba(20, 20, 25, 0.95); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; }
         .ios-btn { background: #fff; color: #000; border-radius: 15px; font-weight: 800; transition: 0.2s; cursor: pointer; }
         
-        /* REAL GAME IMAGES */
+        /* OFFICIAL APP ICONS */
         .game-bar { display: flex; gap: 12px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
-        .game-card { min-width: 90px; height: 90px; border-radius: 20px; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.2); flex-shrink: 0; position: relative; }
-        .game-card span { font-size: 8px; position: absolute; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.8); font-weight: bold; padding: 4px 0; border-radius: 0 0 20px 20px; }
+        .game-card { min-width: 85px; height: 85px; border-radius: 18px; background-size: cover; background-position: center; border: 1.5px solid rgba(255,255,255,0.15); flex-shrink: 0; position: relative; }
+        .game-card span { font-size: 8px; position: absolute; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.85); font-weight: bold; padding: 4px 0; border-radius: 0 0 18px 18px; }
         
         .lang-btn { padding: 6px 12px; border-radius: 10px; font-size: 10px; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); }
         .lang-active { background: #fff; color: #000; }
         .rtl { direction: rtl; text-align: right; }
         
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
-        .shake { animation: shake 0.3s ease-in-out; border: 2px solid #ff3b30 !important; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        .shake { animation: shake 0.3s ease-in-out; border-color: #ff3b30 !important; }
     </style>
 </head>
 <body class="flex flex-col items-center">
 
     <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black/90 backdrop-blur-md border-b border-white/5">
-        <div class="flex items-center gap-2"><i class="fab fa-apple text-xl"></i><span class="font-black italic text-lg">SIMON VEYRON</span></div>
+        <div class="flex items-center gap-2"><i class="fab fa-apple text-xl"></i><span class="font-black italic text-lg tracking-tighter">SIMON VEYRON</span></div>
         <div class="flex gap-1">
             <button onclick="setLanguage('en')" id="btn-en" class="lang-btn lang-active">EN</button>
             <button onclick="setLanguage('ru')" id="btn-ru" class="lang-btn">RU</button>
@@ -38,23 +38,23 @@
         </div>
     </nav>
 
-    <div class="fixed top-20 w-full px-6 z-40 bg-black/50 pb-2">
-        <p id="txt-vault" class="text-[9px] uppercase tracking-widest text-white/40 mb-2 font-bold">In this Vault:</p>
+    <div class="fixed top-20 w-full px-6 z-40 bg-black/80 pb-3">
+        <p id="txt-vault" class="text-[9px] uppercase tracking-widest text-white/40 mb-2 font-bold">Available in Vault:</p>
         <div class="game-bar">
-            <div class="game-card" style="background-image: url('https://raw.githubusercontent.com/SimonGaza/simongaza.github.io/main/gta.jpg'), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=200');"><span>GTA SA</span></div>
-            <div class="game-card" style="background-image: url('https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=200');"><span>Minecraft</span></div>
-            <div class="game-card" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=200');"><span>Bully</span></div>
-            <div class="game-card" style="background-image: url('https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=200');"><span>Stardew</span></div>
-            <div class="game-card" style="background-image: url('https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=200');"><span>G-Dash</span></div>
+            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/c/c4/GTASA_logo.jpg');"><span>GTA SA</span></div>
+            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png');"><span>Minecraft</span></div>
+            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg');"><span>Bully</span></div>
+            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/f/fd/Stardew_Valley_Cover_Art.png');"><span>Stardew</span></div>
+            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/3/35/Geometry_Dash_Logo.PNG');"><span>G-Dash</span></div>
         </div>
     </div>
 
     <section class="mt-64 w-full max-w-md px-5 pb-10" id="main-content">
-        <div class="glass p-8 text-center shadow-2xl transition-all duration-300" id="portal-card">
+        <div class="glass p-8 text-center shadow-2xl transition-all duration-200" id="portal-card">
             
             <div id="unlock-section">
                 <h1 id="txt-title" class="text-2xl font-black mb-4">Verification Required</h1>
-                <p id="txt-desc" class="text-[13px] text-white/50 mb-8 leading-relaxed">Complete the handshake to release the VIP Apple ID key set.</p>
+                <p id="txt-desc" class="text-[13px] text-white/40 mb-8 leading-relaxed">Complete 1 sponsor handshake to unlock the VIP Apple ID.</p>
                 <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-widest">Unlock Apple ID</button>
             </div>
 
@@ -66,19 +66,19 @@
                     </svg>
                     <span id="timer-text" class="absolute text-4xl font-black font-mono">30s</span>
                 </div>
-                <p id="timer-status" class="text-[10px] text-blue-400 uppercase font-black tracking-widest animate-pulse">Decrypting Security...</p>
+                <p id="timer-status" class="text-[10px] text-blue-400 uppercase font-black tracking-widest">Decrypting Access...</p>
             </div>
 
-            <div id="result-section" class="hidden space-y-3 text-left">
+            <div id="result-section" class="hidden space-y-3 text-left animate-in">
                 <div class="bg-white/5 p-4 rounded-xl border border-white/10">
                     <p class="text-[8px] text-white/40 font-black uppercase mb-1">Apple ID</p>
-                    <p class="text-sm font-mono text-white font-bold">vault.apple@veyron.io</p>
+                    <p class="text-sm font-mono text-white font-bold select-all">simon.elite@apple.com</p>
                 </div>
                 <div class="bg-white/5 p-4 rounded-xl border border-white/10">
                     <p class="text-[8px] text-white/40 font-black uppercase mb-1">Password</p>
-                    <p class="text-sm font-mono text-white font-bold">Veyron_Elite_2026</p>
+                    <p class="text-sm font-mono text-white font-bold select-all">SimonVeyron2026!</p>
                 </div>
-                <a href="https://t.me/SimonVeyron" target="_blank" class="block bg-blue-600 p-4 rounded-xl text-center mt-4 font-black text-[10px] uppercase">Get VIP Access</a>
+                <a href="https://t.me/SimonVeyron" target="_blank" class="block bg-blue-600 p-4 rounded-xl text-center mt-4 font-black text-[10px] uppercase">Join VIP Channel</a>
             </div>
         </div>
 
@@ -99,16 +99,15 @@
         let timerInterval;
 
         const translations = {
-            en: { vault: "In this Vault:", title: "Verification Required", desc: "Complete the handshake to release the VIP Apple ID key set.", unlock: "Unlock Apple ID", decrypting: "Decrypting...", warning: "STAY ON ADS PAGE! RESETTING...", rules_h: "Login Rules", rules: "<p>• App Store Login ONLY</p><p>• NEVER use iCloud Settings</p><p>• Sign out after download</p>" },
-            ru: { vault: "В хранилище:", title: "Требуется проверка", desc: "Завершите проверку, чтобы получить доступ к Apple ID.", unlock: "Разблокировать", decrypting: "Расшифровка...", warning: "ОСТАВАЙТЕСЬ НА СТРАНИЦЕ!", rules_h: "Правила входа", rules: "<p>• Вход ТОЛЬКО в App Store</p><p>• НИКОГДА не входите в iCloud</p><p>• Выйдите после загрузки</p>" },
-            ar: { vault: "في هذا المخزن:", title: "مطلوب التحقق", desc: "أكمل المهمة للحصول على حساب أبل إيدي الخاص.", unlock: "فتح الحساب الآن", decrypting: "جاري التحميل...", warning: "ابق في صفحة الإعلانات!", rules_h: "قواعد الدخول", rules: "<p>• متجر التطبيقات فقط</p><p>• لا تستخدم الآي كلاود</p><p>• سجل الخروج بعد التحميل</p>" }
+            en: { vault: "Available in Vault:", title: "Verification Required", desc: "Complete 1 sponsor handshake to unlock the VIP Apple ID.", unlock: "Unlock Apple ID", decrypting: "Decrypting Access...", warning: "STAY ON AD PAGE! RESETTING...", rules_h: "Login Rules", rules: "<p>• App Store Login ONLY</p><p>• NEVER use iCloud Settings</p><p>• Sign out after download</p>" },
+            ru: { vault: "Доступно в хранилище:", title: "Требуется проверка", desc: "Завершите проверку, чтобы получить доступ к VIP Apple ID.", unlock: "Разблокировать", decrypting: "Доступ к расшифровке...", warning: "ОСТАВАЙТЕСЬ НА СТРАНИЦЕ!", rules_h: "Правила входа", rules: "<p>• Вход ТОЛЬКО в App Store</p><p>• НИКОГДА не входите в iCloud</p><p>• Выйдите после загрузки</p>" },
+            ar: { vault: "متوفر في المخزن:", title: "مطلوب التحقق", desc: "أكمل المهمة للحصول على حساب أبل إيدي VIP.", unlock: "فتح الحساب الآن", decrypting: "جاري فك التشفير...", warning: "ابق في صفحة الإعلان!", rules_h: "قواعد الدخول", rules: "<p>• متجر التطبيقات فقط</p><p>• لا تستخدم الآي كلاود</p><p>• سجل الخروج بعد التحميل</p>" }
         };
 
         function setLanguage(lang) {
             const t = translations[lang];
-            const content = document.getElementById('main-content');
-            if(lang === 'ar') { content.classList.add('rtl'); document.getElementById('rules-box').classList.add('rtl'); }
-            else { content.classList.remove('rtl'); document.getElementById('rules-box').classList.remove('rtl'); }
+            if(lang === 'ar') { document.getElementById('main-content').classList.add('rtl'); document.getElementById('rules-box').classList.add('rtl'); }
+            else { document.getElementById('main-content').classList.remove('rtl'); document.getElementById('rules-box').classList.remove('rtl'); }
             document.getElementById('txt-vault').innerText = t.vault;
             document.getElementById('txt-title').innerText = t.title;
             document.getElementById('txt-desc').innerText = t.desc;
@@ -126,30 +125,31 @@
             startTimer();
         }
 
+        // --- THE "ANTI-CHEAET" LOGIC ---
+        function resetTimer() {
+            if (timerStarted && timeRemaining > 0) {
+                timeRemaining = 30; // Force reset to 30
+                const lang = document.querySelector('.lang-active').id.split('-')[1];
+                document.getElementById('timer-status').innerHTML = `<span style="color:#ff3b30; font-weight:900;">${translations[lang].warning}</span>`;
+                document.getElementById('portal-card').classList.add('shake');
+                setTimeout(() => document.getElementById('portal-card').classList.remove('shake'), 400);
+            }
+        }
+
+        // Detect if they switch tabs OR close the browser focus
+        window.onblur = resetTimer;
+        document.addEventListener("visibilitychange", () => { if (document.hidden) resetTimer(); });
+
         function startTimer() {
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                // If user leaves this tab or switches back from the ad too early:
-                if (document.hidden) {
-                    timeRemaining = 30; // RESET TIMER TO FULL
-                    const lang = document.querySelector('.lang-active').id.split('-')[1];
-                    document.getElementById('timer-status').innerHTML = `<span style="color:#ff3b30; font-weight:900;">${translations[lang].warning}</span>`;
-                    document.getElementById('portal-card').classList.add('shake');
-                    setTimeout(() => document.getElementById('portal-card').classList.remove('shake'), 500);
-                } else {
-                    timeRemaining--;
-                    document.getElementById('timer-text').innerText = timeRemaining + "s";
-                    document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 30) * 377;
-                    
-                    const lang = document.querySelector('.lang-active').id.split('-')[1];
-                    if (timeRemaining > 0) {
-                        document.getElementById('timer-status').innerText = translations[lang].decrypting;
-                    }
-                    
-                    if (timeRemaining <= 0) {
-                        clearInterval(timerInterval);
-                        showResult();
-                    }
+                timeRemaining--;
+                document.getElementById('timer-text').innerText = timeRemaining + "s";
+                document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 30) * 377;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    showResult();
                 }
             }, 1000);
         }
