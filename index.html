@@ -10,27 +10,21 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700;900&display=swap');
         * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; }
         body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow: hidden; }
-        
         .glass { background: rgba(20, 20, 25, 0.95); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; }
         .ios-btn { background: #fff; color: #000; border-radius: 15px; font-weight: 800; transition: 0.2s; cursor: pointer; }
-        
-        /* OFFICIAL APP ICONS */
         .game-bar { display: flex; gap: 12px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
-        .game-card { min-width: 85px; height: 85px; border-radius: 18px; background-size: cover; background-position: center; border: 1.5px solid rgba(255,255,255,0.15); flex-shrink: 0; position: relative; }
-        .game-card span { font-size: 8px; position: absolute; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.85); font-weight: bold; padding: 4px 0; border-radius: 0 0 18px 18px; }
-        
+        .game-card { min-width: 85px; height: 85px; border-radius: 18px; background-size: cover; background-position: center; border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0; position: relative; background-color: #111; }
+        .game-card span { font-size: 8px; position: absolute; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.8); font-weight: bold; padding: 4px 0; border-radius: 0 0 18px 18px; }
         .lang-btn { padding: 6px 12px; border-radius: 10px; font-size: 10px; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); }
         .lang-active { background: #fff; color: #000; }
-        .rtl { direction: rtl; text-align: right; }
-        
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
         .shake { animation: shake 0.3s ease-in-out; border-color: #ff3b30 !important; }
     </style>
 </head>
 <body class="flex flex-col items-center">
 
-    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black/90 backdrop-blur-md border-b border-white/5">
-        <div class="flex items-center gap-2"><i class="fab fa-apple text-xl"></i><span class="font-black italic text-lg tracking-tighter">SIMON VEYRON</span></div>
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black/95 border-b border-white/5">
+        <div class="flex items-center gap-2"><i class="fab fa-apple text-xl"></i><span class="font-black italic">SIMON VEYRON</span></div>
         <div class="flex gap-1">
             <button onclick="setLanguage('en')" id="btn-en" class="lang-btn lang-active">EN</button>
             <button onclick="setLanguage('ru')" id="btn-ru" class="lang-btn">RU</button>
@@ -38,56 +32,37 @@
         </div>
     </nav>
 
-    <div class="fixed top-20 w-full px-6 z-40 bg-black/80 pb-3">
-        <p id="txt-vault" class="text-[9px] uppercase tracking-widest text-white/40 mb-2 font-bold">Available in Vault:</p>
+    <div class="fixed top-20 w-full px-6 z-40 bg-black/50 pb-4">
+        <p id="txt-vault" class="text-[9px] uppercase tracking-widest text-white/40 mb-2 font-bold">In this Vault:</p>
         <div class="game-bar">
-            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/c/c4/GTASA_logo.jpg');"><span>GTA SA</span></div>
-            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png');"><span>Minecraft</span></div>
-            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg');"><span>Bully</span></div>
-            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/f/fd/Stardew_Valley_Cover_Art.png');"><span>Stardew</span></div>
-            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/3/35/Geometry_Dash_Logo.PNG');"><span>G-Dash</span></div>
+            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/64/00/54/64005471-a889-137b-9993-27d667634f1a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>GTA SA</span></div>
+            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/51/79/1a/51791a8e-20f4-5f80-043f-b6764724df3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>Minecraft</span></div>
+            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/41/4a/da/414adaf0-4660-f38b-d779-30f143714b60/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>Bully</span></div>
+            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/05/20/48/0520485a-068d-8d48-9366-2675a34e0220/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>Stardew</span></div>
+            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/71/3b/f7/713bf733-f7cc-8319-97cc-0b81ec134375/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>G-Dash</span></div>
         </div>
     </div>
 
     <section class="mt-64 w-full max-w-md px-5 pb-10" id="main-content">
-        <div class="glass p-8 text-center shadow-2xl transition-all duration-200" id="portal-card">
-            
+        <div class="glass p-8 text-center" id="portal-card">
             <div id="unlock-section">
                 <h1 id="txt-title" class="text-2xl font-black mb-4">Verification Required</h1>
-                <p id="txt-desc" class="text-[13px] text-white/40 mb-8 leading-relaxed">Complete 1 sponsor handshake to unlock the VIP Apple ID.</p>
+                <p id="txt-desc" class="text-[13px] text-white/50 mb-8">Click unlock and stay on the ad page for 30s.</p>
                 <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-widest">Unlock Apple ID</button>
             </div>
 
-            <div id="countdown-section" class="hidden py-4">
+            <div id="countdown-section" class="hidden">
                 <div class="relative flex items-center justify-center mb-6">
-                    <svg class="w-32 h-32 transform -rotate-90">
-                        <circle cx="64" cy="64" r="60" stroke="rgba(255,255,255,0.05)" stroke-width="6" fill="transparent" />
-                        <circle id="timer-circle" cx="64" cy="64" r="60" stroke="#34C759" stroke-width="6" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" />
-                    </svg>
-                    <span id="timer-text" class="absolute text-4xl font-black font-mono">30s</span>
+                    <svg class="w-32 h-32 transform -rotate-90"><circle cx="64" cy="64" r="60" stroke="#222" stroke-width="6" fill="transparent" /><circle id="timer-circle" cx="64" cy="64" r="60" stroke="#34C759" stroke-width="6" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" /></svg>
+                    <span id="timer-text" class="absolute text-4xl font-black">30s</span>
                 </div>
-                <p id="timer-status" class="text-[10px] text-blue-400 uppercase font-black tracking-widest">Decrypting Access...</p>
+                <p id="timer-status" class="text-[10px] text-blue-400 font-black uppercase tracking-widest">Verifying Connection...</p>
             </div>
 
-            <div id="result-section" class="hidden space-y-3 text-left animate-in">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <p class="text-[8px] text-white/40 font-black uppercase mb-1">Apple ID</p>
-                    <p class="text-sm font-mono text-white font-bold select-all">simon.elite@apple.com</p>
-                </div>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <p class="text-[8px] text-white/40 font-black uppercase mb-1">Password</p>
-                    <p class="text-sm font-mono text-white font-bold select-all">SimonVeyron2026!</p>
-                </div>
-                <a href="https://t.me/SimonVeyron" target="_blank" class="block bg-blue-600 p-4 rounded-xl text-center mt-4 font-black text-[10px] uppercase">Join VIP Channel</a>
-            </div>
-        </div>
-
-        <div id="rules-box" class="mt-6 glass p-6">
-            <h3 id="txt-rules-head" class="text-blue-400 text-[10px] font-black uppercase mb-4 tracking-widest">Login Rules</h3>
-            <div id="txt-rules-list" class="text-[12px] text-white/60 space-y-3">
-                <p>• App Store Login ONLY</p>
-                <p>• NEVER use iCloud Settings</p>
-                <p>• Sign out after download</p>
+            <div id="result-section" class="hidden space-y-3 text-left">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10"><p class="text-[8px] text-white/40 font-black uppercase">Apple ID</p><p class="text-sm font-mono font-bold">simon.elite@apple.com</p></div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10"><p class="text-[8px] text-white/40 font-black uppercase">Password</p><p class="text-sm font-mono font-bold">SimonVeyron2026!</p></div>
+                <a href="https://t.me/SimonVeyron" class="block bg-blue-600 p-4 rounded-xl text-center font-black text-[10px] uppercase">Join VIP Channel</a>
             </div>
         </div>
     </section>
@@ -99,21 +74,16 @@
         let timerInterval;
 
         const translations = {
-            en: { vault: "Available in Vault:", title: "Verification Required", desc: "Complete 1 sponsor handshake to unlock the VIP Apple ID.", unlock: "Unlock Apple ID", decrypting: "Decrypting Access...", warning: "STAY ON AD PAGE! RESETTING...", rules_h: "Login Rules", rules: "<p>• App Store Login ONLY</p><p>• NEVER use iCloud Settings</p><p>• Sign out after download</p>" },
-            ru: { vault: "Доступно в хранилище:", title: "Требуется проверка", desc: "Завершите проверку, чтобы получить доступ к VIP Apple ID.", unlock: "Разблокировать", decrypting: "Доступ к расшифровке...", warning: "ОСТАВАЙТЕСЬ НА СТРАНИЦЕ!", rules_h: "Правила входа", rules: "<p>• Вход ТОЛЬКО в App Store</p><p>• НИКОГДА не входите в iCloud</p><p>• Выйдите после загрузки</p>" },
-            ar: { vault: "متوفر في المخزن:", title: "مطلوب التحقق", desc: "أكمل المهمة للحصول على حساب أبل إيدي VIP.", unlock: "فتح الحساب الآن", decrypting: "جاري فك التشفير...", warning: "ابق في صفحة الإعلان!", rules_h: "قواعد الدخول", rules: "<p>• متجر التطبيقات فقط</p><p>• لا تستخدم الآي كلاود</p><p>• سجل الخروج بعد التحميل</p>" }
+            en: { title: "Verification Required", desc: "Click unlock and stay on the ad page for 30s.", unlock: "Unlock Apple ID", warning: "STAY ON AD PAGE! RESETTING..." },
+            ru: { title: "Требуется проверка", desc: "Нажмите и оставайтесь на странице рекламы 30 сек.", unlock: "Разблокировать", warning: "НЕ УХОДИТЕ! СБРОС..." },
+            ar: { title: "مطلوب التحقق", desc: "اضغط على فتح الحساب وابق في صفحة الإعلان لمدة 30 ثانية.", unlock: "فتح الحساب الآن", warning: "ابق في صفحة الإعلان! إعادة تعيين..." }
         };
 
         function setLanguage(lang) {
             const t = translations[lang];
-            if(lang === 'ar') { document.getElementById('main-content').classList.add('rtl'); document.getElementById('rules-box').classList.add('rtl'); }
-            else { document.getElementById('main-content').classList.remove('rtl'); document.getElementById('rules-box').classList.remove('rtl'); }
-            document.getElementById('txt-vault').innerText = t.vault;
             document.getElementById('txt-title').innerText = t.title;
             document.getElementById('txt-desc').innerText = t.desc;
             document.getElementById('unlockBtn').innerText = t.unlock;
-            document.getElementById('txt-rules-head').innerText = t.rules_h;
-            document.getElementById('txt-rules-list').innerHTML = t.rules;
             ['en', 'ru', 'ar'].forEach(l => document.getElementById('btn-'+l).className = lang === l ? 'lang-btn lang-active' : 'lang-btn');
         }
 
@@ -125,31 +95,27 @@
             startTimer();
         }
 
-        // --- THE "ANTI-CHEAET" LOGIC ---
-        function resetTimer() {
+        // HARD PROTECTION: If user switches back to this tab, we check if they cheated
+        window.addEventListener('focus', () => {
             if (timerStarted && timeRemaining > 0) {
-                timeRemaining = 30; // Force reset to 30
+                // Penalize for leaving early
+                timeRemaining = 30; 
                 const lang = document.querySelector('.lang-active').id.split('-')[1];
-                document.getElementById('timer-status').innerHTML = `<span style="color:#ff3b30; font-weight:900;">${translations[lang].warning}</span>`;
+                document.getElementById('timer-status').innerHTML = `<span style="color:#ff3b30;">${translations[lang].warning}</span>`;
                 document.getElementById('portal-card').classList.add('shake');
                 setTimeout(() => document.getElementById('portal-card').classList.remove('shake'), 400);
             }
-        }
-
-        // Detect if they switch tabs OR close the browser focus
-        window.onblur = resetTimer;
-        document.addEventListener("visibilitychange", () => { if (document.hidden) resetTimer(); });
+        });
 
         function startTimer() {
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                timeRemaining--;
-                document.getElementById('timer-text').innerText = timeRemaining + "s";
-                document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 30) * 377;
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    showResult();
+                // If they are looking at our site instead of the ad, the timer stops or resets
+                if (!document.hidden) {
+                    timeRemaining--;
+                    document.getElementById('timer-text').innerText = timeRemaining + "s";
+                    document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 30) * 377;
+                    if (timeRemaining <= 0) { clearInterval(timerInterval); showResult(); }
                 }
             }, 1000);
         }
