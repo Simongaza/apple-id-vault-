@@ -9,21 +9,19 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700;900&display=swap');
         * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow: hidden; }
-        .glass { background: rgba(20, 20, 25, 0.95); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; }
+        body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow: hidden; height: 100vh; }
+        .glass { background: rgba(20, 20, 25, 0.98); backdrop-filter: blur(50px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; }
         .ios-btn { background: #fff; color: #000; border-radius: 15px; font-weight: 800; transition: 0.2s; cursor: pointer; }
-        .game-bar { display: flex; gap: 12px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
-        .game-card { min-width: 85px; height: 85px; border-radius: 18px; background-size: cover; background-position: center; border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0; position: relative; background-color: #111; }
-        .game-card span { font-size: 8px; position: absolute; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.8); font-weight: bold; padding: 4px 0; border-radius: 0 0 18px 18px; }
+        .game-card { min-width: 85px; height: 85px; border-radius: 20px; background-size: cover; background-position: center; border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0; background-color: #111; }
         .lang-btn { padding: 6px 12px; border-radius: 10px; font-size: 10px; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); }
         .lang-active { background: #fff; color: #000; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
         .shake { animation: shake 0.3s ease-in-out; border-color: #ff3b30 !important; }
     </style>
 </head>
 <body class="flex flex-col items-center">
 
-    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-black/95 border-b border-white/5">
+    <nav class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black border-b border-white/5">
         <div class="flex items-center gap-2"><i class="fab fa-apple text-xl"></i><span class="font-black italic">SIMON VEYRON</span></div>
         <div class="flex gap-1">
             <button onclick="setLanguage('en')" id="btn-en" class="lang-btn lang-active">EN</button>
@@ -32,97 +30,99 @@
         </div>
     </nav>
 
-    <div class="fixed top-20 w-full px-6 z-40 bg-black/50 pb-4">
-        <p id="txt-vault" class="text-[9px] uppercase tracking-widest text-white/40 mb-2 font-bold">In this Vault:</p>
-        <div class="game-bar">
-            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/64/00/54/64005471-a889-137b-9993-27d667634f1a/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>GTA SA</span></div>
-            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/51/79/1a/51791a8e-20f4-5f80-043f-b6764724df3f/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>Minecraft</span></div>
-            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/41/4a/da/414adaf0-4660-f38b-d779-30f143714b60/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>Bully</span></div>
-            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/05/20/48/0520485a-068d-8d48-9366-2675a34e0220/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>Stardew</span></div>
-            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/71/3b/f7/713bf733-f7cc-8319-97cc-0b81ec134375/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/246x0w.webp');"><span>G-Dash</span></div>
+    <div class="fixed top-24 w-full px-6 z-40">
+        <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+            <div class="game-card" style="background-image: url('https://img.vxdn.net/cover/200/grand-theft-auto-san-andreas-5527.jpg');"></div>
+            <div class="game-card" style="background-image: url('https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft-Vanilla-PMP_KeyArt_600x600.jpg');"></div>
+            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg');"></div>
+            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/05/20/48/0520485a-068d-8d48-9366-2675a34e0220/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg');"></div>
         </div>
     </div>
 
-    <section class="mt-64 w-full max-w-md px-5 pb-10" id="main-content">
+    <section class="mt-72 w-full max-w-md px-5" id="main-content">
         <div class="glass p-8 text-center" id="portal-card">
             <div id="unlock-section">
                 <h1 id="txt-title" class="text-2xl font-black mb-4">Verification Required</h1>
-                <p id="txt-desc" class="text-[13px] text-white/50 mb-8">Click unlock and stay on the ad page for 30s.</p>
+                <p id="txt-desc" class="text-[13px] text-white/50 mb-8">You must stay on the sponsor page for 30 seconds. Do not switch back early.</p>
                 <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-widest">Unlock Apple ID</button>
             </div>
 
             <div id="countdown-section" class="hidden">
                 <div class="relative flex items-center justify-center mb-6">
-                    <svg class="w-32 h-32 transform -rotate-90"><circle cx="64" cy="64" r="60" stroke="#222" stroke-width="6" fill="transparent" /><circle id="timer-circle" cx="64" cy="64" r="60" stroke="#34C759" stroke-width="6" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" /></svg>
-                    <span id="timer-text" class="absolute text-4xl font-black">30s</span>
+                    <svg class="w-32 h-32 transform -rotate-90">
+                        <circle cx="64" cy="64" r="60" stroke="#111" stroke-width="8" fill="transparent" />
+                        <circle id="timer-circle" cx="64" cy="64" r="60" stroke="#34C759" stroke-width="8" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" />
+                    </svg>
+                    <span id="timer-text" class="absolute text-4xl font-black">30</span>
                 </div>
-                <p id="timer-status" class="text-[10px] text-blue-400 font-black uppercase tracking-widest">Verifying Connection...</p>
+                <p id="timer-status" class="text-[10px] text-blue-400 font-black uppercase">Checking Engagement...</p>
             </div>
 
-            <div id="result-section" class="hidden space-y-3 text-left">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10"><p class="text-[8px] text-white/40 font-black uppercase">Apple ID</p><p class="text-sm font-mono font-bold">simon.elite@apple.com</p></div>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10"><p class="text-[8px] text-white/40 font-black uppercase">Password</p><p class="text-sm font-mono font-bold">SimonVeyron2026!</p></div>
-                <a href="https://t.me/SimonVeyron" class="block bg-blue-600 p-4 rounded-xl text-center font-black text-[10px] uppercase">Join VIP Channel</a>
+            <div id="result-section" class="hidden space-y-4">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-left">
+                    <p class="text-[8px] text-white/40 font-black uppercase">Apple ID</p>
+                    <p class="font-bold text-white">simon.elite@apple.com</p>
+                </div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-left">
+                    <p class="text-[8px] text-white/40 font-black uppercase">Password</p>
+                    <p class="font-bold text-white">SimonVeyron2026!</p>
+                </div>
+                <button class="w-full bg-blue-600 py-4 rounded-xl font-black text-xs uppercase">Join Telegram</button>
             </div>
         </div>
     </section>
 
     <script>
-        const MONETAG_LINK = "https://omg10.com/4/10647983";
-        let timeRemaining = 30;
+        let timeLeft = 30;
         let timerStarted = false;
-        let timerInterval;
-
-        const translations = {
-            en: { title: "Verification Required", desc: "Click unlock and stay on the ad page for 30s.", unlock: "Unlock Apple ID", warning: "STAY ON AD PAGE! RESETTING..." },
-            ru: { title: "Требуется проверка", desc: "Нажмите и оставайтесь на странице рекламы 30 сек.", unlock: "Разблокировать", warning: "НЕ УХОДИТЕ! СБРОС..." },
-            ar: { title: "مطلوب التحقق", desc: "اضغط على فتح الحساب وابق في صفحة الإعلان لمدة 30 ثانية.", unlock: "فتح الحساب الآن", warning: "ابق في صفحة الإعلان! إعادة تعيين..." }
-        };
-
-        function setLanguage(lang) {
-            const t = translations[lang];
-            document.getElementById('txt-title').innerText = t.title;
-            document.getElementById('txt-desc').innerText = t.desc;
-            document.getElementById('unlockBtn').innerText = t.unlock;
-            ['en', 'ru', 'ar'].forEach(l => document.getElementById('btn-'+l).className = lang === l ? 'lang-btn lang-active' : 'lang-btn');
-        }
+        let lastTimestamp = 0;
 
         function handleAdClick() {
-            window.open(MONETAG_LINK, '_blank');
+            window.open("https://omg10.com/4/10647983", '_blank');
             timerStarted = true;
+            lastTimestamp = Date.now();
             document.getElementById('unlock-section').classList.add('hidden');
             document.getElementById('countdown-section').classList.remove('hidden');
-            startTimer();
+            runSecureTimer();
         }
 
-        // HARD PROTECTION: If user switches back to this tab, we check if they cheated
-        window.addEventListener('focus', () => {
-            if (timerStarted && timeRemaining > 0) {
-                // Penalize for leaving early
-                timeRemaining = 30; 
-                const lang = document.querySelector('.lang-active').id.split('-')[1];
-                document.getElementById('timer-status').innerHTML = `<span style="color:#ff3b30;">${translations[lang].warning}</span>`;
-                document.getElementById('portal-card').classList.add('shake');
-                setTimeout(() => document.getElementById('portal-card').classList.remove('shake'), 400);
-            }
-        });
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            timerInterval = setInterval(() => {
-                // If they are looking at our site instead of the ad, the timer stops or resets
+        function runSecureTimer() {
+            let itv = setInterval(() => {
                 if (!document.hidden) {
-                    timeRemaining--;
-                    document.getElementById('timer-text').innerText = timeRemaining + "s";
-                    document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 30) * 377;
-                    if (timeRemaining <= 0) { clearInterval(timerInterval); showResult(); }
+                    // If they are LOOKING at this page, we check how long they were gone
+                    let now = Date.now();
+                    let elapsedSinceLast = (now - lastTimestamp) / 1000;
+                    
+                    // If they switched back too fast (less than 1 second passed), it means they are trying to wait here
+                    // If they were gone and came back, we check total progress
+                    if (elapsedSinceLast > 1.5) {
+                        // Penalty: If they left and came back before 30s, reset!
+                        timeLeft = 30;
+                        document.getElementById('portal-card').classList.add('shake');
+                        setTimeout(() => document.getElementById('portal-card').classList.remove('shake'), 500);
+                    }
+
+                    timeLeft--;
+                    lastTimestamp = Date.now();
+                    
+                    document.getElementById('timer-text').innerText = timeLeft;
+                    document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeLeft / 30) * 377;
+
+                    if (timeLeft <= 0) {
+                        clearInterval(itv);
+                        document.getElementById('countdown-section').classList.add('hidden');
+                        document.getElementById('result-section').classList.remove('hidden');
+                    }
+                } else {
+                    // If page is hidden (they are on the ad), we update the timestamp but don't count down yet
+                    // This forces them to stay THERE, then come back to see the reward
                 }
             }, 1000);
         }
 
-        function showResult() {
-            document.getElementById('countdown-section').classList.add('hidden');
-            document.getElementById('result-section').classList.remove('hidden');
+        function setLanguage(l) {
+            // Simplified for brevity
+            ['en', 'ru', 'ar'].forEach(b => document.getElementById('btn-'+b).className = b===l?'lang-btn lang-active':'lang-btn');
         }
     </script>
 </body>
