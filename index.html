@@ -3,126 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Simon Veyron | VIP Vault</title>
+    <title>SIMON VEYRON | Official Vault</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700;900&display=swap');
-        * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; }
-        body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow: hidden; height: 100vh; }
-        .glass { background: rgba(20, 20, 25, 0.98); backdrop-filter: blur(50px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; }
-        .ios-btn { background: #fff; color: #000; border-radius: 15px; font-weight: 800; transition: 0.2s; cursor: pointer; }
-        .game-card { min-width: 85px; height: 85px; border-radius: 20px; background-size: cover; background-position: center; border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0; background-color: #111; }
-        .lang-btn { padding: 6px 12px; border-radius: 10px; font-size: 10px; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); }
-        .lang-active { background: #fff; color: #000; }
+        body { background: #000; color: #fff; font-family: sans-serif; overflow: hidden; }
+        .glass { background: #111; border: 1px solid #222; border-radius: 24px; }
+        .ios-btn { background: #fff; color: #000; border-radius: 12px; font-weight: 900; }
+        .game-icon { width: 80px; height: 80px; border-radius: 18px; border: 1px solid #333; background-size: cover; flex-shrink: 0; }
+        /* Real Icons via direct stable CDN */
+        .ic-mc { background-image: url('https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png'); }
+        .ic-gta { background-image: url('https://upload.wikimedia.org/wikipedia/en/c/c4/GTASA_logo.jpg'); }
+        .ic-bully { background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg'); }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
-        .shake { animation: shake 0.3s ease-in-out; border-color: #ff3b30 !important; }
+        .shake { animation: shake 0.3s ease-in-out; border: 2px solid #ff3b30 !important; }
     </style>
 </head>
-<body class="flex flex-col items-center">
+<body class="p-6">
 
-    <nav class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black border-b border-white/5">
-        <div class="flex items-center gap-2"><i class="fab fa-apple text-xl"></i><span class="font-black italic">SIMON VEYRON</span></div>
-        <div class="flex gap-1">
-            <button onclick="setLanguage('en')" id="btn-en" class="lang-btn lang-active">EN</button>
-            <button onclick="setLanguage('ru')" id="btn-ru" class="lang-btn">RU</button>
-            <button onclick="setLanguage('ar')" id="btn-ar" class="lang-btn">AR</button>
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="font-black italic text-xl">SIMON VEYRON</h1>
+        <div class="bg-zinc-800 px-3 py-1 rounded-full text-[10px] font-bold">ONLINE</div>
+    </div>
+
+    <div class="flex gap-4 overflow-x-auto mb-10 pb-2">
+        <div class="game-icon ic-mc"></div>
+        <div class="game-icon ic-gta"></div>
+        <div class="game-icon ic-bully"></div>
+    </div>
+
+    <div class="glass p-8 text-center" id="card">
+        <div id="step-1">
+            <h2 class="text-2xl font-black mb-2">Verification</h2>
+            <p class="text-zinc-500 text-sm mb-6">Stay on the ad page for 30s to release the Apple ID.</p>
+            <button onclick="startFlow()" class="ios-btn w-full py-4 text-sm uppercase">Unlock Now</button>
         </div>
-    </nav>
 
-    <div class="fixed top-24 w-full px-6 z-40">
-        <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-            <div class="game-card" style="background-image: url('https://img.vxdn.net/cover/200/grand-theft-auto-san-andreas-5527.jpg');"></div>
-            <div class="game-card" style="background-image: url('https://www.minecraft.net/content/dam/games/minecraft/key-art/Minecraft-Vanilla-PMP_KeyArt_600x600.jpg');"></div>
-            <div class="game-card" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg');"></div>
-            <div class="game-card" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/05/20/48/0520485a-068d-8d48-9366-2675a34e0220/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/512x512bb.jpg');"></div>
+        <div id="step-2" class="hidden">
+            <div class="text-5xl font-black mb-4" id="timer">30</div>
+            <p class="text-blue-400 font-bold text-xs uppercase tracking-widest" id="status">Verifying Ad View...</p>
+        </div>
+
+        <div id="step-3" class="hidden text-left space-y-4">
+            <div class="bg-zinc-900 p-4 rounded-xl">
+                <p class="text-[10px] text-zinc-500 font-bold uppercase">Apple ID</p>
+                <p class="font-mono text-white">vault.veyron@apple.com</p>
+            </div>
+            <div class="bg-zinc-900 p-4 rounded-xl">
+                <p class="text-[10px] text-zinc-500 font-bold uppercase">Password</p>
+                <p class="font-mono text-white">Veyron2026!</p>
+            </div>
         </div>
     </div>
 
-    <section class="mt-72 w-full max-w-md px-5" id="main-content">
-        <div class="glass p-8 text-center" id="portal-card">
-            <div id="unlock-section">
-                <h1 id="txt-title" class="text-2xl font-black mb-4">Verification Required</h1>
-                <p id="txt-desc" class="text-[13px] text-white/50 mb-8">You must stay on the sponsor page for 30 seconds. Do not switch back early.</p>
-                <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-widest">Unlock Apple ID</button>
-            </div>
-
-            <div id="countdown-section" class="hidden">
-                <div class="relative flex items-center justify-center mb-6">
-                    <svg class="w-32 h-32 transform -rotate-90">
-                        <circle cx="64" cy="64" r="60" stroke="#111" stroke-width="8" fill="transparent" />
-                        <circle id="timer-circle" cx="64" cy="64" r="60" stroke="#34C759" stroke-width="8" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" />
-                    </svg>
-                    <span id="timer-text" class="absolute text-4xl font-black">30</span>
-                </div>
-                <p id="timer-status" class="text-[10px] text-blue-400 font-black uppercase">Checking Engagement...</p>
-            </div>
-
-            <div id="result-section" class="hidden space-y-4">
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-left">
-                    <p class="text-[8px] text-white/40 font-black uppercase">Apple ID</p>
-                    <p class="font-bold text-white">simon.elite@apple.com</p>
-                </div>
-                <div class="bg-white/5 p-4 rounded-xl border border-white/10 text-left">
-                    <p class="text-[8px] text-white/40 font-black uppercase">Password</p>
-                    <p class="font-bold text-white">SimonVeyron2026!</p>
-                </div>
-                <button class="w-full bg-blue-600 py-4 rounded-xl font-black text-xs uppercase">Join Telegram</button>
-            </div>
-        </div>
-    </section>
-
     <script>
-        let timeLeft = 30;
-        let timerStarted = false;
-        let lastTimestamp = 0;
+        let count = 30;
+        let active = false;
+        let lastSeen = Date.now();
 
-        function handleAdClick() {
+        function startFlow() {
             window.open("https://omg10.com/4/10647983", '_blank');
-            timerStarted = true;
-            lastTimestamp = Date.now();
-            document.getElementById('unlock-section').classList.add('hidden');
-            document.getElementById('countdown-section').classList.remove('hidden');
-            runSecureTimer();
-        }
-
-        function runSecureTimer() {
-            let itv = setInterval(() => {
-                if (!document.hidden) {
-                    // If they are LOOKING at this page, we check how long they were gone
-                    let now = Date.now();
-                    let elapsedSinceLast = (now - lastTimestamp) / 1000;
-                    
-                    // If they switched back too fast (less than 1 second passed), it means they are trying to wait here
-                    // If they were gone and came back, we check total progress
-                    if (elapsedSinceLast > 1.5) {
-                        // Penalty: If they left and came back before 30s, reset!
-                        timeLeft = 30;
-                        document.getElementById('portal-card').classList.add('shake');
-                        setTimeout(() => document.getElementById('portal-card').classList.remove('shake'), 500);
+            active = true;
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            
+            setInterval(() => {
+                if (active) {
+                    // THE CHEAT CHECK:
+                    // If the user is looking at THIS page (document.hidden is false),
+                    // but the clock says they've been here for more than 1.5 seconds... 
+                    // it means they are waiting here instead of the ad. RESET.
+                    if (!document.hidden) {
+                        let now = Date.now();
+                        if (now - lastSeen > 1500) {
+                            count = 30; // RESET TO 30
+                            document.getElementById('card').classList.add('shake');
+                            document.getElementById('status').innerText = "STAY ON THE AD PAGE!";
+                            setTimeout(() => document.getElementById('card').classList.remove('shake'), 500);
+                        }
+                        count--;
+                        lastSeen = now;
                     }
-
-                    timeLeft--;
-                    lastTimestamp = Date.now();
                     
-                    document.getElementById('timer-text').innerText = timeLeft;
-                    document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeLeft / 30) * 377;
-
-                    if (timeLeft <= 0) {
-                        clearInterval(itv);
-                        document.getElementById('countdown-section').classList.add('hidden');
-                        document.getElementById('result-section').classList.remove('hidden');
+                    document.getElementById('timer').innerText = count;
+                    if (count <= 0) {
+                        active = false;
+                        document.getElementById('step-2').classList.add('hidden');
+                        document.getElementById('step-3').classList.remove('hidden');
                     }
-                } else {
-                    // If page is hidden (they are on the ad), we update the timestamp but don't count down yet
-                    // This forces them to stay THERE, then come back to see the reward
                 }
             }, 1000);
-        }
-
-        function setLanguage(l) {
-            // Simplified for brevity
-            ['en', 'ru', 'ar'].forEach(b => document.getElementById('btn-'+b).className = b===l?'lang-btn lang-active':'lang-btn');
         }
     </script>
 </body>
