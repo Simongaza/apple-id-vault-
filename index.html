@@ -3,198 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Simon Veyron | VIP Vault 2026</title>
+    <title>iOS 26 | SIMON VEYRON Global Vault</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        
-        * { -webkit-tap-highlight-color: transparent; user-select: none; box-sizing: border-box; cursor: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&family=Noto+Sans+Arabic:wght@400;700;900&display=swap');
+        * { -webkit-tap-highlight-color: transparent; user-select: none; }
+        body { background: #000; color: #fff; font-family: 'Inter', 'Noto Sans Arabic', sans-serif; margin: 0; overflow-x: hidden; }
 
-        /* iOS 26 Dynamic Background */
-        body { 
-            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Inter', sans-serif;
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .glass { background: rgba(15, 15, 20, 0.9); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 35px; }
+        .ios-btn { background: #fff; color: #000; border-radius: 18px; font-weight: 800; transition: 0.3s; }
+        .ios-btn:disabled { background: #333; color: #777; }
 
-        /* Liquid Glass Panels */
-        .glass { 
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(60px) saturate(180%);
-            -webkit-backdrop-filter: blur(60px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Dynamic Island */
-        .dynamic-island {
-            width: 120px;
-            height: 35px;
-            background: #000;
-            border-radius: 20px;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            overflow: hidden;
-        }
-        .island-active { width: 300px; height: 60px; border-radius: 30px; }
-
-        .game-icon {
-            width: 85px; height: 85px; border-radius: 20px;
+        /* GAME CARDS */
+        .game-bar { display: flex; gap: 12px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+        .game-card {
+            min-width: 85px; height: 85px; border-radius: 20px; 
             background-size: cover; background-position: center;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.2); flex-shrink: 0; position: relative;
         }
-        .game-icon:hover { transform: scale(1.1); }
+        .game-card span { font-size: 9px; position: absolute; bottom: 0; width: 100%; text-align: center; background: rgba(0,0,0,0.7); font-weight: bold; padding: 3px 0; border-radius: 0 0 20px 20px; }
 
-        .btn-ios {
-            background: #fff; color: #000; border-radius: 20px;
-            font-weight: 900; transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .btn-ios:active { transform: scale(0.95); background: #e0e0e0; }
-
-        @keyframes pulse-red { 0% { border-color: rgba(255, 59, 48, 0.5); } 50% { border-color: rgba(255, 59, 48, 1); } 100% { border-color: rgba(255, 59, 48, 0.5); } }
-        .timer-warning { animation: pulse-red 1s infinite; border-width: 2px; }
-
-        /* Custom Scrollbar */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        /* LANGUAGE TOGGLE */
+        .lang-btn { padding: 6px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+        .lang-active { background: #fff; color: #000; border-color: #fff; }
+        
+        /* RTL Support */
+        .rtl { direction: rtl; text-align: right; }
     </style>
 </head>
-<body>
+<body class="flex flex-col items-center">
 
-    <div id="island" class="dynamic-island">
-        <span id="island-text" class="text-[10px] font-bold tracking-tight opacity-0">SYSTEM SECURE</span>
-    </div>
-
-    <nav class="w-full px-8 py-6 flex justify-between items-center mt-4">
-        <div class="flex items-center gap-3">
-            <i class="fab fa-apple text-3xl"></i>
-            <span class="font-black italic text-xl tracking-tighter">SIMON VEYRON</span>
-        </div>
-        <div class="glass px-4 py-2 rounded-full text-[10px] font-black border-none bg-white/10">
-            VAULT v4.0
+    <nav class="fixed top-0 w-full z-50 px-6 py-5 flex justify-between items-center bg-black/80 backdrop-blur-xl border-b border-white/5">
+        <div class="flex items-center gap-3"><i class="fab fa-apple text-2xl"></i><span class="font-black text-lg italic">SIMON VEYRON</span></div>
+        <div class="flex gap-1" id="lang-switcher">
+            <button onclick="setLanguage('en')" id="btn-en" class="lang-btn lang-active">EN</button>
+            <button onclick="setLanguage('ru')" id="btn-ru" class="lang-btn">RU</button>
+            <button onclick="setLanguage('ar')" id="btn-ar" class="lang-btn">AR</button>
         </div>
     </nav>
 
-    <main class="w-full max-w-lg px-6 mt-10">
-        <div class="flex gap-4 overflow-x-auto no-scrollbar mb-10 pb-4">
-            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png');"></div>
-            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/c/c4/GTASA_logo.jpg');"></div>
-            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/e/ee/Bully_Scholarship_Edition_Box_Art.jpg');"></div>
-            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/f/fd/Stardew_Valley_Cover_Art.png');"></div>
-            <div class="game-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/en/3/35/Geometry_Dash_Logo.PNG');"></div>
+    <div class="fixed top-24 w-full px-6 z-40">
+        <p id="txt-vault" class="text-[9px] uppercase tracking-widest text-white/40 mb-2 font-bold">In this Vault:</p>
+        <div class="game-bar">
+            <div class="game-card" style="background-image: url('https://i.imgur.com/8N4N89m.png');"><span>GTA SA</span></div>
+            <div class="game-card" style="background-image: url('https://i.imgur.com/S8M69f9.png');"><span>Minecraft</span></div>
+            <div class="game-card" style="background-image: url('https://i.imgur.com/6U6lIAn.png');"><span>Bully</span></div>
+            <div class="game-card" style="background-image: url('https://i.imgur.com/vHpxr9s.png');"><span>Stardew</span></div>
+            <div class="game-card" style="background-image: url('https://i.imgur.com/A6jX6Wk.png');"><span>G-Dash</span></div>
+        </div>
+    </div>
+
+    <section class="mt-64 w-full max-w-md px-5 pb-20" id="main-content">
+        <div class="glass p-8 text-center shadow-2xl">
+            
+            <div id="unlock-section">
+                <h1 id="txt-title" class="text-2xl font-black mb-4">Verification Required</h1>
+                <div id="txt-desc" class="bg-white/5 p-4 rounded-2xl mb-8 border border-white/5 text-[12px] text-white/60">
+                    Complete one sponsor handshake to release the current Apple ID key set.
+                </div>
+                <button onclick="handleAdClick()" id="unlockBtn" class="ios-btn w-full py-5 text-[12px] uppercase tracking-widest">Unlock Apple ID</button>
+            </div>
+
+            <div id="countdown-section" class="hidden py-4 text-center">
+                <div class="relative flex items-center justify-center mb-6">
+                    <svg class="w-32 h-32 transform -rotate-90">
+                        <circle cx="64" cy="64" r="60" stroke="rgba(255,255,255,0.05)" stroke-width="4" fill="transparent" />
+                        <circle id="timer-circle" cx="64" cy="64" r="60" stroke="#34C759" stroke-width="5" fill="transparent" stroke-dasharray="377" stroke-dashoffset="0" stroke-linecap="round" />
+                    </svg>
+                    <span id="timer-text" class="absolute text-3xl font-black font-mono">30s</span>
+                </div>
+                <p id="timer-status" class="text-[10px] text-blue-400 uppercase font-black tracking-widest">Decrypting...</p>
+            </div>
+
+            <div id="result-section" class="hidden space-y-4 text-left">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <p class="text-[8px] text-white/40 font-black uppercase mb-1">Apple ID</p>
+                    <p id="apple-email" class="text-sm font-mono text-white font-bold">vault.apple@veyron.io</p>
+                </div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                    <p class="text-[8px] text-white/40 font-black uppercase mb-1">Password</p>
+                    <p id="apple-pass" class="text-sm font-mono text-white font-bold">Veyron_Elite_2026</p>
+                </div>
+                <a href="https://t.me/SimonVeyron" target="_blank" class="block bg-blue-600 p-4 rounded-xl text-center mt-4">
+                    <p id="txt-vip" class="text-[10px] font-black uppercase tracking-widest">Get VIP Access</p>
+                </a>
+            </div>
         </div>
 
-        <div class="glass p-10 text-center relative overflow-hidden" id="main-card">
-            <div id="start-screen">
-                <h2 class="text-3xl font-black mb-2">Vault Locked</h2>
-                <p class="text-white/50 text-sm mb-10">Verification protocol required. Complete the sponsor handshake to access premium Apple IDs.</p>
-                <button onclick="launchVerification()" class="btn-ios w-full py-6 text-sm uppercase tracking-widest">Start Handshake</button>
-            </div>
-
-            <div id="timer-screen" class="hidden">
-                <div class="text-7xl font-black mb-4 tracking-tighter" id="countdown">30</div>
-                <p id="timer-msg" class="text-blue-400 font-black text-[10px] uppercase tracking-widest">Connection Encrypted</p>
-            </div>
-
-            <div id="success-screen" class="hidden space-y-4">
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/10 text-left">
-                    <p class="text-[9px] text-white/30 font-black uppercase mb-1">Elite Apple ID</p>
-                    <p class="text-lg font-bold">veyron.vip@icloud.com</p>
-                </div>
-                <div class="bg-white/5 p-6 rounded-3xl border border-white/10 text-left">
-                    <p class="text-[9px] text-white/30 font-black uppercase mb-1">Vault Password</p>
-                    <p class="text-lg font-bold">SimonVeyron_2026!</p>
-                </div>
-                <button class="w-full bg-blue-600 py-5 rounded-3xl font-black uppercase text-xs mt-4">Join Telegram Channel</button>
+        <div id="rules-box" class="mt-6 glass p-5">
+            <h3 id="txt-rules-head" class="text-blue-400 text-[10px] font-black uppercase mb-3">Login Rules</h3>
+            <div id="txt-rules-list" class="text-[11px] text-white/60 space-y-2">
+                <p>• App Store Login ONLY</p>
+                <p>• NEVER use iCloud Settings</p>
+                <p>• Sign out after download</p>
             </div>
         </div>
-
-        <div class="glass mt-6 p-8">
-            <h3 class="text-blue-400 font-black text-[10px] uppercase mb-6 tracking-widest">Protocol Rules</h3>
-            <div class="space-y-4 text-[13px] text-white/60">
-                <div class="flex gap-4">
-                    <span class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-bold text-white">01</span>
-                    <p>Only sign in through the <strong class="text-white">App Store</strong>. Never use iCloud.</p>
-                </div>
-                <div class="flex gap-4">
-                    <span class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-bold text-white">02</span>
-                    <p>Stay on the ad page for the full 30s. <strong class="text-red-400">Timer will reset</strong> if you return early.</p>
-                </div>
-                <div class="flex gap-4">
-                    <span class="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-bold text-white">03</span>
-                    <p>Logout immediately after your download begins.</p>
-                </div>
-            </div>
-        </div>
-    </main>
+    </section>
 
     <script>
-        let seconds = 30;
-        let flowStarted = false;
-        let lastTimestamp = Date.now();
+        const MONETAG_LINK = "https://omg10.com/4/10647983";
+        let timeRemaining = 30;
+        let timerStarted = false;
+        let timerInterval;
 
-        function updateIsland(text, active = true) {
-            const island = document.getElementById('island');
-            const islandText = document.getElementById('island-text');
-            if (active) {
-                island.classList.add('island-active');
-                islandText.innerText = text;
-                islandText.style.opacity = "1";
-            } else {
-                island.classList.remove('island-active');
-                islandText.style.opacity = "0";
+        const translations = {
+            en: {
+                vault: "In this Vault:", title: "Verification Required", desc: "Complete one sponsor handshake to release the Apple ID.", unlock: "Unlock Apple ID", decrypting: "Decrypting...", warning: "BYPASS DETECTED", vip: "Get VIP Access", rules_h: "Login Rules", rules: "<p>• App Store Login ONLY</p><p>• NEVER use iCloud Settings</p><p>• Sign out after download</p>"
+            },
+            ru: {
+                vault: "В хранилище:", title: "Требуется проверка", desc: "Выполните одно задание, чтобы получить Apple ID.", unlock: "Разблокировать", decrypting: "Расшифровка...", warning: "ОБНАРУЖЕН ОБХОД", vip: "Получить VIP", rules_h: "Правила входа", rules: "<p>• Вход ТОЛЬКО в App Store</p><p>• НИКОГДА не входите в iCloud</p><p>• Выйдите после загрузки</p>"
+            },
+            ar: {
+                vault: "في هذا المخزن:", title: "مطلوب التحقق", desc: "أكمل مهمة واحدة للحصول على حساب أبل إيدي.", unlock: "فتح الحساب الآن", decrypting: "جاري فك التشفير...", warning: "تم اكتشاف تجاوز - إعادة تعيين", vip: "احصل على اشتراك VIP", rules_h: "قواعد تسجيل الدخول", rules: "<p>• تسجيل الدخول في متجر التطبيقات فقط</p><p>• لا تستخدم إعدادات آي كلاود أبداً</p><p>• تسجيل الخروج بعد التحميل</p>"
             }
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+            const content = document.getElementById('main-content');
+            const rules = document.getElementById('rules-box');
+            
+            // Handle RTL for Arabic
+            if(lang === 'ar') { content.classList.add('rtl'); rules.classList.add('rtl'); }
+            else { content.classList.remove('rtl'); rules.classList.remove('rtl'); }
+
+            document.getElementById('txt-vault').innerText = t.vault;
+            document.getElementById('txt-title').innerText = t.title;
+            document.getElementById('txt-desc').innerText = t.desc;
+            document.getElementById('unlockBtn').innerText = t.unlock;
+            document.getElementById('timer-status').innerText = t.decrypting;
+            document.getElementById('txt-vip').innerText = t.vip;
+            document.getElementById('txt-rules-head').innerText = t.rules_h;
+            document.getElementById('txt-rules-list').innerHTML = t.rules;
+            
+            ['en', 'ru', 'ar'].forEach(l => {
+                document.getElementById('btn-'+l).className = lang === l ? 'lang-btn lang-active' : 'lang-btn';
+            });
         }
 
-        function launchVerification() {
-            window.open("https://omg10.com/4/10647983", '_blank');
-            flowStarted = true;
-            lastTimestamp = Date.now();
-            document.getElementById('start-screen').classList.add('hidden');
-            document.getElementById('timer-screen').classList.remove('hidden');
-            updateIsland("AD VIEW ACTIVE");
-            
-            const mainTimer = setInterval(() => {
-                if (!document.hidden) {
-                    let now = Date.now();
-                    // If they are back here but not enough time passed, reset!
-                    if (now - lastTimestamp > 1800) { 
-                        seconds = 30;
-                        document.getElementById('main-card').classList.add('timer-warning');
-                        document.getElementById('timer-msg').innerText = "DETECTION: STAY ON AD PAGE!";
-                        document.getElementById('timer-msg').classList.replace('text-blue-400', 'text-red-500');
-                        updateIsland("DETECTION: RESETTING...");
-                        setTimeout(() => {
-                            document.getElementById('main-card').classList.remove('timer-warning');
-                            document.getElementById('timer-msg').classList.replace('text-red-500', 'text-blue-400');
-                        }, 2000);
-                    }
-                    
-                    seconds--;
-                    lastTimestamp = Date.now();
-                    document.getElementById('countdown').innerText = seconds;
+        function handleAdClick() {
+            window.open(MONETAG_LINK, '_blank');
+            timerStarted = true;
+            document.getElementById('unlock-section').classList.add('hidden');
+            document.getElementById('countdown-section').classList.remove('hidden');
+            startTimer();
+        }
 
-                    if (seconds <= 0) {
-                        clearInterval(mainTimer);
-                        updateIsland("VAULT DECRYPTED");
-                        document.getElementById('timer-screen').classList.add('hidden');
-                        document.getElementById('success-screen').classList.remove('hidden');
-                        setTimeout(() => updateIsland("", false), 3000);
-                    }
-                }
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden && timerStarted && timeRemaining > 0) {
+                clearInterval(timerInterval);
+                timeRemaining = 30; 
+                document.getElementById('timer-status').innerHTML = `<span style="color:#ff3b30; font-weight:bold;">${translations[document.getElementById('btn-ar').classList.contains('lang-active') ? 'ar' : 'en'].warning}</span>`;
+            } else if (!document.hidden && timerStarted) { startTimer(); }
+        });
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer-text').innerText = timeRemaining + "s";
+                document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 30) * 377;
+                if (timeRemaining <= 0) { clearInterval(timerInterval); showResult(); }
             }, 1000);
+        }
+
+        function showResult() {
+            document.getElementById('countdown-section').classList.add('hidden');
+            document.getElementById('result-section').classList.remove('hidden');
         }
     </script>
 </body>
