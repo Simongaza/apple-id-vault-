@@ -21,6 +21,21 @@
             overflow-x: hidden;
         }
 
+        /* Splash Screen Base styles */
+        #splash-screen {
+            background: #000000;
+            transition: opacity 0.5s ease, visibility 0.5s;
+        }
+
+        @keyframes spinner-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-spinner {
+            animation: spinner-rotate 2s linear infinite;
+        }
+
         /* iOS Translucent Glassmorphism Style */
         .glass {
             background: var(--ios-glass);
@@ -39,6 +54,7 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .lang-active {
@@ -85,7 +101,21 @@
 </head>
 <body class="flex items-center justify-center p-4">
 
-    <main id="main-content" class="w-full max-w-md space-y-6">
+    <!-- Loading Splash Screen -->
+    <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-6">
+        <div class="flex flex-col items-center space-y-4">
+            <!-- Rotating SVG Container -->
+            <div class="w-16 h-16 loading-spinner flex items-center justify-center">
+                <svg class="w-12 h-12 fill-white" viewBox="0 0 170 170">
+                    <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.38.13-9.13-1.91-14.26-6.12-3.46-2.91-7.4-7.73-11.83-14.46-5.12-7.74-9.44-16.71-12.96-26.93-3.52-10.22-5.28-20.1-5.28-29.63 0-14.34 3.78-25.79 11.33-34.36 7.56-8.57 16.9-12.89 28.03-12.97 4.25 0 9.17 1.21 14.75 3.63 5.58 2.42 9.4 3.63 11.47 3.63 1.83 0 5.86-1.29 12.07-3.87 6.21-2.58 11.04-3.79 14.5-3.63 14.34.46 25.13 5.76 32.37 15.91-12.56 7.64-18.73 17.84-18.52 30.59.21 10.15 4.1 18.57 11.68 25.26 7.58 6.69 16.4 10.21 26.47 10.56-.21 1.76-.52 3.86-.94 6.31zM116.32 23.36c0-6.93 2.42-13.23 7.26-18.89 5.5-6.42 12.21-9.94 20.12-10.56.08.75.12 1.41.12 1.98 0 6.69-2.49 13.04-7.46 19.03-2.58 3.15-5.83 5.92-9.74 8.31-3.91 2.38-7.79 3.67-11.64 3.87-.21-.54-.33-1.12-.33-1.74z"/>
+                </svg>
+            </div>
+            <h1 class="font-black text-xl tracking-tight uppercase">Simon Veyron</h1>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="w-full max-w-md space-y-6 opacity-0" style="transition: opacity 0.5s ease;">
         
         <!-- Header & Language Selection -->
         <header class="flex items-center justify-between px-2">
@@ -95,14 +125,14 @@
                 </svg>
                 <span class="font-black text-lg tracking-tight uppercase">Simon Veyron</span>
             </div>
-            <div class="flex space-x-1.5">
-                <button id="btn-en" onclick="setLanguage('en')" class="lang-btn lang-active">EN</button>
-                <button id="btn-ru" onclick="setLanguage('ru')" class="lang-btn">RU</button>
-                <button id="btn-ar" onclick="setLanguage('ar')" class="lang-btn">AR</button>
+            <div class="flex space-x-1.5 overflow-x-auto no-scrollbar max-w-[200px]">
+                <button id="btn-en" onclick="setLanguage('en')" class="lang-btn lang-active">English</button>
+                <button id="btn-ru" onclick="setLanguage('ru')" class="lang-btn">Русский</button>
+                <button id="btn-ar" onclick="setLanguage('ar')" class="lang-btn">العربية</button>
             </div>
         </header>
 
-        <!-- In This Vault: App Badge Showcase (Clean Monogram Badges) -->
+        <!-- In This Vault: App Badge Showcase -->
         <div class="px-2">
             <h3 id="txt-vault" class="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-3">In this Vault:</h3>
             <div class="flex space-x-4 overflow-x-auto no-scrollbar pb-1">
@@ -144,7 +174,7 @@
             <!-- Step 1: Unlock Action Window -->
             <div id="unlock-section" class="glass p-6 text-center space-y-6">
                 <div class="space-y-2">
-                    <h2 id="txt-title" class="text-2xl font-bold tracking-tight">Verification Required</h2>
+                    <h2 id="txt-title" class="text-2xl font-bold tracking-tight">Unlock Apple ID</h2>
                     <p id="txt-desc" class="text-xs text-white/60 px-4">Complete one sponsor handshake to release the Apple ID.</p>
                 </div>
                 <button id="unlockBtn" onclick="handleAdClick()" class="ios-btn text-sm shadow-xl">Unlock Apple ID</button>
@@ -187,23 +217,35 @@
     <!-- Operational State Automation Engine -->
     <script>
         const MONETAG_LINK = "https://omg10.com/4/10647983";
-        let timeRemaining = 5; // Updated to 5 seconds
+        let timeRemaining = 5; 
         let timerStarted = false;
         let timerInterval;
         let currentLang = 'en';
 
+        // Handles loading splash sequence
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                const mainContent = document.getElementById('main-content');
+                
+                splash.style.opacity = '0';
+                splash.style.visibility = 'hidden';
+                mainContent.style.opacity = '1';
+            }, 2500); // 2.5 second animation loader
+        });
+
         const translations = {
             en: {
-                vault: "In this Vault:", title: "Verification Required", desc: "Complete one sponsor handshake to release the Apple ID.", unlock: "Unlock Apple ID", decrypting: "Decrypting...", warning: "BYPASS DETECTED", vip: "Get VIP Access", rules_h: "Login Rules", rules: "<p>• App Store Login ONLY</p><p>• NEVER use iCloud Settings</p><p>• Sign out after download</p>",
+                vault: "In this Vault:", title: "Unlock Apple ID", desc: "Complete one sponsor handshake to release the Apple ID.", unlock: "Unlock Apple ID", decrypting: "Decrypting...", warning: "BYPASS DETECTED", vip: "Get VIP Access", rules_h: "Login Rules", rules: "<p>• App Store Login ONLY</p><p>• NEVER use iCloud Settings</p><p>• Sign out after download</p>",
                 email: "appvault.en@icloud.com", pass: "AppleVault77#"
             },
             ru: {
-                vault: "В хранилище:", title: "Требуется проверка", desc: "Выполните одно задание, чтобы получить Apple ID.", unlock: "Разблокировать", decrypting: "Расшифровка...", warning: "ОБНАРУЖЕН ОБХОД", vip: "Получить VIP", rules_h: "Правила входа", rules: "<p>• Вход ТОЛЬКО в App Store</p><p>• НИКОГДА не входите в iCloud</p><p>• Выйдите после загрузки</p>",
+                vault: "В хранилище:", title: "Разблокировать Apple ID", desc: "Выполните одно задание, чтобы получить Apple ID.", unlock: "Разблокировать", decrypting: "Расшифровка...", warning: "ОБНАРУЖЕН ОБХОД", vip: "Получить VIP", rules_h: "Правила входа", rules: "<p>• Вход ТОЛЬКО в App Store</p><p>• НИКОГДА не входите в iCloud</p><p>• Выйдите после загрузки</p>",
                 email: "appvault.ru@icloud.com", pass: "AppleVault77#"
             },
             ar: {
-                vault: "في هذا المخزن:", title: "مطلوب التحقق", desc: "أكمل مهمة واحدة للحصول على حساب أبل إيدي.", unlock: "فتح الحساب الآن", decrypting: "جاري فك التشفير...", warning: "تم اكتشاف تجاوز - إعادة تعيين", vip: "احصل على اشتراك VIP", rules_h: "قواعد تسجيل الدخول", rules: "<p>• تسجيل الدخول في متجر التطبيقات فقط</p><p>• لا تستخدم إعدادات آي كلاود أبداً</p><p>• تسجيل الخروج بعد التحميل</p>",
-                email: "appvault.ar@icloud.com", pass: "AppleVault77#"
+                vault: "في هذا المخزن:", title: "فتح حساب Apple ID", desc: "أكمل مهمة واحدة للحصول على حساب أبل إيدي.", unlock: "فتح الحساب الآن", decrypting: "جاري فك التشفير...", warning: "تم اكتشاف تجاوز - إعادة تعيين", vip: "احصل على اشتراك VIP", rules_h: "قواعد تسجيل الدخول", rules: "<p>• تسجيل الدخول في متجر التطبيقات فقط</p><p>• لا تستخدم إعدادات آي كلاود أبداً</p><p>• تسجيل الخروج بعد التحميل</p>",
+                email: "soon", pass: "soon"
             }
         };
 
@@ -260,7 +302,6 @@
             timerInterval = setInterval(() => {
                 timeRemaining--;
                 document.getElementById('timer-text').innerText = timeRemaining + "s";
-                // Synchronized circle offset animation calibrated to 5 seconds
                 document.getElementById('timer-circle').style.strokeDashoffset = 377 - (timeRemaining / 5) * 377;
                 if (timeRemaining <= 0) { 
                     clearInterval(timerInterval); 
@@ -274,7 +315,7 @@
             const resultSection = document.getElementById('result-section');
             
             resultSection.innerHTML = `
-                <div class="glass p-6 text-center space-y-5 animate-fade-in">
+                <div class="glass p-6 text-center space-y-5">
                     <h3 class="text-green-400 font-black text-xl tracking-wide uppercase">🔓 Access Granted</h3>
                     <div class="text-left space-y-4">
                         <div class="flex flex-col space-y-1.5">
